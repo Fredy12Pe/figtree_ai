@@ -10,10 +10,6 @@ const Description = ({ className = '' }: DescriptionProps) => {
       className={`${className}`}
       style={{ 
         width: '455px', 
-        height: '324px',
-        justifyContent: 'flex-end', 
-        display: 'flex', 
-        flexDirection: 'column', 
         color: 'white', 
         fontSize: '18px', 
         fontFamily: 'Inter', 

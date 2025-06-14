@@ -6,9 +6,9 @@ interface HeadingProps {
 
 const Heading = ({ className = '' }: HeadingProps) => {
   return (
-    <div className={`mb-[40px] ${className}`}>
+    <div className={`${className}`}>
       <h2 
-        className="mb-[24px]" 
+        className="mb-3" 
         style={{ 
           color: 'white',
           fontSize: '48px',

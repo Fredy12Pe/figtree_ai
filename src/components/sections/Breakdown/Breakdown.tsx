@@ -32,8 +32,8 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
         {/* Title Section */}
         <div className={styles.titleSection}>
           <h2 className={styles.sectionTitle}>
-            How it works
-          </h2>
+          How it works
+        </h2>
         </div>
 
         <div className={styles.cardContainer}>

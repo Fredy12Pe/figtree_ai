@@ -40,7 +40,15 @@ export default function ServicesGrid({ className = '' }: ServicesGridProps) {
   ];
 
   return (
-    <div className={`grid grid-cols-2 gap-[20px] ${className}`}>
+    <div 
+      className={`grid h-full ${className}`} 
+      style={{ 
+        gridTemplateColumns: 'repeat(2, 423px)',
+        columnGap: '20px',
+        rowGap: '20px',
+        alignContent: 'center'
+      }}
+    >
       {services.map((service, index) => (
         <ServiceCard
           key={index}
