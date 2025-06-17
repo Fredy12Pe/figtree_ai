@@ -5,7 +5,8 @@ import AutomationExplainer from '@/components/sections/AutomationExplainer'
 import VideoExplainerSection from '@/components/sections/AutomationExplainer/VideoExplainerSection'
 import ScrollBanner from '@/components/sections/ScrollBanner/ScrollBanner'
 import FAQ from '@/components/sections/FAQ/FAQ'
-import Contact from '@/components/sections/Contact'
+import Contact from '@/components/sections/Contact/Contact'
+import Footer from '@/components/sections/Footer/Footer'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <ScrollBanner />
       <FAQ />
       <Contact />
+      <Footer />
     </main>
   )
 }
