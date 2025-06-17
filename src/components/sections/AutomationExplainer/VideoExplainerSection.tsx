@@ -76,37 +76,66 @@ export default function VideoExplainerSection() {
             left: '80px',
             transform: 'translateY(-50%)',
             zIndex: 2,
-            width: '380px',
+            width: '480px',
             color: 'white',
           }}
         >
           <h2
             className="mb-8"
             style={{
-              width: '426px',
               fontSize: '38px',
               fontFamily: 'Inter',
-              fontWeight: 600,
+              fontWeight: 700,
               wordWrap: 'break-word',
               color: 'white',
               marginBottom: '20px',
             }}
           >
-            Why AI automation isn&apos;t just a buzzword – it&apos;s your new business partner.
+            Why AI + Automation?
           </h2>
           <p
             style={{
               width: '100%',
               fontSize: '16px',
               fontFamily: 'Inter',
-              fontWeight: 500,
+              fontWeight: 400,
+              lineHeight: '22px',
+              wordWrap: 'break-word',
+              color: 'white',
+              margin: 0,
+              marginBottom: '1rem',
+            }}
+          >
+            You can&apos;t automate everything, but you shouldn&apos;t do everything manually either.
+          </p>
+          <p
+            style={{
+              width: '100%',
+              fontSize: '16px',
+              fontFamily: 'Inter',
+              fontWeight: 400,
+              lineHeight: '22px',
+              wordWrap: 'break-word',
+              color: 'white',
+              margin: 0,
+              marginBottom: '1rem',
+            }}
+          >
+            AI replaces busywork, not your expertise.
+          </p>
+          <p
+            style={{
+              width: '100%',
+              fontSize: '16px',
+              fontFamily: 'Inter',
+              fontWeight: 400,
               lineHeight: '22px',
               wordWrap: 'break-word',
               color: 'white',
               margin: 0,
             }}
           >
-            See how we transform your operations, one automated task at a time.
+            Time saved = revenue gained and more time to dedicate to building relationships with your clients.
           </p>
           <div
             style={buttonStyle}
