@@ -137,17 +137,16 @@ export default function VideoExplainerSection() {
           >
             Time saved = revenue gained and more time to dedicate to building relationships with your clients.
           </p>
-          <div
-            style={buttonStyle}
+          <button
+            style={{
+              ...buttonStyle,
+              ...textStyle,
+            }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div
-              style={textStyle}
-            >
-              Book a Free Consultation
-            </div>
-          </div>
+            Book a Free Consultation
+          </button>
         </div>
       </div>
     </section>

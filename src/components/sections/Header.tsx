@@ -68,6 +68,12 @@ export default function Header() {
             <Link href="#" className="text-[16px] font-medium text-white">How It Works</Link>
             <Link href="#" className="text-[16px] font-medium text-white">Pricing</Link>
             <Link href="#" className="text-[16px] font-medium text-white">About</Link>
+            <Link 
+              href="#" 
+              className="text-[16px] font-medium border border-white rounded-[8px] w-[146px] h-[49px] flex items-center justify-center transition hover:bg-[#0916FF] text-white"
+            >
+              Get In Touch
+            </Link>
           </div>
         </nav>
         {/* Hero Content */}
@@ -83,7 +89,7 @@ export default function Header() {
             </div>
             <Link 
               href="#" 
-              className="inline-flex items-center justify-center gap-[10px] w-[284px] h-[56px] text-white text-[16px] font-medium rounded-full border border-white bg-[#0A1A82] transition mt-[40px] hover:bg-white hover:text-[#0A1A82]"
+              className="inline-flex items-center justify-center gap-[10px] w-[284px] h-[56px] text-white text-[16px] font-medium rounded-full bg-[rgba(13,25,255,0.19)] border border-white transition mt-[40px] hover:bg-[#0916FF]"
             >
               Book a Free Consultation
             </Link>
