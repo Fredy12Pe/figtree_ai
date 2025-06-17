@@ -3,14 +3,12 @@ import { motion, MotionValue, useTransform } from 'framer-motion';
 
 interface AutomationProps {
   className?: string;
-  animationProgress?: MotionValue<number>;
-  imageAnimationProgress?: MotionValue<number>;
+  imageAnimationProgress: MotionValue<number>;
 }
 
-export default function Automation({ className = '', animationProgress, imageAnimationProgress }: AutomationProps) {
-  // Smoother slide-in animation over longer duration
-  const imageX = imageAnimationProgress ? useTransform(imageAnimationProgress, [0, 0.5], [100, 0]) : 0;
-  const imageOpacity = imageAnimationProgress ? useTransform(imageAnimationProgress, [0, 0.3], [0, 1]) : 1;
+export default function Automation({ className = '', imageAnimationProgress }: AutomationProps) {
+  const imageX = useTransform(imageAnimationProgress, [0, 0.5], [100, 0]);
+  const imageOpacity = useTransform(imageAnimationProgress, [0, 0.3], [0, 1]);
 
   return (
     <div 

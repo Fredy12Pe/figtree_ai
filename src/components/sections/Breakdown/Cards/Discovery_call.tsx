@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 interface DiscoveryCallProps {
   className?: string;
@@ -79,13 +80,23 @@ export default function DiscoveryCall({ className = '', animationProgress, image
         </div>
         
         {/* Right Side with Static Image */}
-        <div className="relative" style={{ width: '900px', height: '636px', marginRight: '280px', zIndex: 3 }}>
-          <img 
+        <div 
+          className="relative" 
+          style={{ 
+            width: '1200px', 
+            height: '636px', 
+            marginRight: '190px', 
+            zIndex: 3 
+          }}
+        >
+          <Image 
             src="/Assets/Breakdown/Discovery_call.png" 
-            alt="Professional businessman on discovery call"
+            alt="Professional woman on a discovery call"
+            width={1200}
+            height={636}
             style={{ 
-              height: '636px',
               width: 'auto',
+              height: '636px',
               position: 'absolute',
               right: 0,
               top: 0

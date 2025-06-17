@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './FAQ.module.css';
 import {
   Clock,
@@ -12,6 +12,7 @@ import {
   Target,
   TrendingUp
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface FAQItem {
   question: string;
@@ -125,3 +126,4 @@ const FAQ = () => {
 };
 
 export default FAQ; 
+

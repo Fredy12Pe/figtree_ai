@@ -1,4 +1,6 @@
-import Link from 'next/link';
+import React from 'react';
+import { Instagram, Linkedin } from 'lucide-react';
+import styles from './Footer.module.css';
 
 const Footer = () => {
   return (

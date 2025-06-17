@@ -92,7 +92,7 @@ export default function VideoExplainerSection() {
               marginBottom: '20px',
             }}
           >
-            Why AI + Automation?
+            Why AI automation isn&apos;t just a buzzword – it&apos;s your new business partner.
           </h2>
           <p
             style={{
@@ -106,9 +106,7 @@ export default function VideoExplainerSection() {
               margin: 0,
             }}
           >
-            You can't automate everything, but you shouldn't do everything manually either.<br /><br />
-            AI replaces busywork, not your expertise.<br /><br />
-            Time saved = revenue gained and more time to dedicate to building relationships with your clients.
+            See how we transform your operations, one automated task at a time.
           </p>
           <div
             style={buttonStyle}

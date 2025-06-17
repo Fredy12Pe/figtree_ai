@@ -1,8 +1,13 @@
 "use client";
+import React from 'react';
 import { useRef, useEffect } from 'react';
-import ImpactCard from '../ImpactCard';
- 
-export default function LogoCard({ className = '' }) {
+import { motion, MotionValue } from 'framer-motion';
+
+interface LogoCardProps {
+  scrollYProgress: MotionValue<number>;
+}
+
+const LogoCard: React.FC<LogoCardProps> = ({ scrollYProgress }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -90,4 +95,6 @@ export default function LogoCard({ className = '' }) {
       />
     </div>
   );
-} 
+}
+
+export default LogoCard; 

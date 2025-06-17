@@ -1,5 +1,7 @@
-import ImpactCard from '../ImpactCard';
- 
+import React from 'react';
+import { motion, MotionValue } from 'framer-motion';
+import styles from './AItoolsCard.module.css'; // Assuming this is intentional, leaving as is.
+
 export default function ClientsCard({ className = '' }) {
   return (
     <div 
@@ -41,6 +43,9 @@ export default function ClientsCard({ className = '' }) {
           clients
         </h3>
       </div>
+      <p className="text-sm text-center">
+        We&apos;ve helped businesses reclaim hundreds of hours.
+      </p>
     </div>
   );
 } 
