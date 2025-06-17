@@ -4,10 +4,10 @@ import { useRef, useEffect } from 'react';
 import { motion, MotionValue } from 'framer-motion';
 
 interface LogoCardProps {
-  scrollYProgress: MotionValue<number>;
+  className?: string;
 }
 
-const LogoCard: React.FC<LogoCardProps> = ({ scrollYProgress }) => {
+const LogoCard: React.FC<LogoCardProps> = ({ className = '' }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
