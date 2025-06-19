@@ -50,7 +50,7 @@ const LogoCard: React.FC<LogoCardProps> = ({ className = '' }) => {
 
   return (
     <div 
-      className={`rounded-[28px] h-[390px] cursor-pointer transition-transform duration-300 ease-in-out hover:scale-102 relative overflow-hidden ${className}`}
+      className={`rounded-[28px] min-h-[390px] cursor-pointer transition-transform duration-300 ease-in-out hover:scale-102 relative overflow-hidden ${className}`}
       style={{
         background: 'black',
         position: 'relative',

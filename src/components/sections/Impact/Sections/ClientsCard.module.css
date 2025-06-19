@@ -1,0 +1,62 @@
+.card {
+  border-radius: 28px;
+  min-height: 390px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding: 24px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding: 44px 40px 28px;
+  }
+}
+
+.headingSection {
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .headingSection {
+    margin-bottom: 51px;
+  }
+}
+
+.cardTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+@media (min-width: 768px) {
+  .cardTitle {
+    font-size: 16px;
+  }
+}
+
+.largeTitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .largeTitle {
+    font-size: 34px;
+  }
+} 
