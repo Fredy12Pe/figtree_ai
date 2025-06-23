@@ -66,7 +66,7 @@ const faqData: FAQItem[] = [
 const FAQ = () => {
   return (
     <section className="bg-white py-[120px] flex justify-center">
-      <div className="w-[1440px] px-[80px]">
+      <div className="max-w-[1440px] w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
         <div className="mb-[60px]">
           <h2 
             className="mb-6"

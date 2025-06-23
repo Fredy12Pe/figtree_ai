@@ -19,8 +19,7 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"],
-    layoutEffect: false 
+    offset: ["start start", "end start"]
   });
 
   return (
@@ -38,14 +37,16 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
         </div>
 
         <div className={styles.cardContainer}>
-          {cardComponents.map((CardComponent, index) => (
-            <BreakdownCard
-              key={index}
-              CardComponent={CardComponent}
-              index={index}
-              scrollYProgress={scrollYProgress}
-            />
-          ))}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {cardComponents.map((CardComponent, index) => (
+              <BreakdownCard
+                key={index}
+                CardComponent={CardComponent}
+                index={index}
+                scrollYProgress={scrollYProgress}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

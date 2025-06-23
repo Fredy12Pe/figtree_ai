@@ -33,12 +33,12 @@ const BreakdownCard = ({ CardComponent, scrollYProgress, index }: BreakdownCardP
     );
   }
 
-  // Last card should stay visible during the pause period (75%-100% of total scroll)
+  // Last card should stay visible for longer during the pause period
   if (index === 2) {
-    // Card 3: Stay fully visible throughout its entire progress + pause
+    // Card 3: Stay fully visible until 90% scroll, then fade out
     const y = 0;
     const scale = 1;
-    const opacity = useTransform(scrollYProgress, [0.75, 0.95, 1], [1, 1, 0]);
+    const opacity = useTransform(scrollYProgress, [0.75, 0.9, 1], [1, 1, 0]);
     
     return (
       <motion.div

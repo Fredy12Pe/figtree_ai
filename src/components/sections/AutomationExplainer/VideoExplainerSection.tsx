@@ -36,7 +36,7 @@ export default function VideoExplainerSection() {
       style={{ backgroundColor: '#000000', minHeight: '85vh' }}
     >
       <div
-        className="relative w-[1440px] h-[620px] overflow-hidden"
+        className="relative max-w-[1440px] w-full h-[620px] overflow-hidden mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-24"
         style={{ borderRadius: '28px' }}
       >
         {/* Video Background */}

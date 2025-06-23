@@ -1,24 +1,24 @@
-import Header from '@/components/sections/Header'
+import HeaderWrapper from '@/components/sections/HeaderWrapper'
 import Impact from '@/components/sections/Impact'
 import Breakdown from '@/components/sections/Breakdown'
 import AutomationExplainer from '@/components/sections/AutomationExplainer'
 import VideoExplainerSection from '@/components/sections/AutomationExplainer/VideoExplainerSection'
 import ScrollBanner from '@/components/sections/ScrollBanner/ScrollBanner'
 import FAQ from '@/components/sections/FAQ/FAQ'
-import Contact from '@/components/sections/Contact/Contact'
+import ContactWrapper from '@/components/sections/Contact/ContactWrapper'
 import Footer from '@/components/sections/Footer/Footer'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <Header />
+      <HeaderWrapper />
       <Impact />
       <Breakdown />
       <AutomationExplainer />
       <VideoExplainerSection />
       <ScrollBanner />
       <FAQ />
-      <Contact />
+      <ContactWrapper />
       <Footer />
     </main>
   )
