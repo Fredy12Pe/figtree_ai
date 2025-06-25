@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useScroll } from 'framer-motion';
 import DiscoveryCall from './Cards/Discovery_call';
 import Automation from './Cards/Automation';
@@ -16,11 +16,24 @@ const cardComponents = [DiscoveryCall, Automation, GoLive];
 
 const Breakdown = ({ className = '' }: BreakdownProps) => {
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Always create scroll progress
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
+    layoutEffect: false
   });
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1023);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <div ref={containerRef} className={`${styles.container} ${className}`}>
@@ -36,8 +49,8 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
           </h2>
         </div>
 
-        <div className={styles.cardContainer}>
-          <div className="relative w-full h-full flex items-center justify-center">
+        <div className={styles.viewport} style={{ height: isMobile ? '561px' : 'auto' }}>
+          <div className={styles.cardContainer}>
             {cardComponents.map((CardComponent, index) => (
               <BreakdownCard
                 key={index}

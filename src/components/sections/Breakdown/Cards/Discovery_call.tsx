@@ -1,19 +1,40 @@
+"use client";
+
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
-import Image from 'next/image';
+import styles from '../Breakdown.module.css';
 
 interface DiscoveryCallProps {
-  className?: string;
-  animationProgress?: MotionValue<number>;
-  imageAnimationProgress?: MotionValue<number>;
+  animationProgress: MotionValue<number>;
+  imageAnimationProgress: MotionValue<number>;
+  isMobile?: boolean;
 }
 
-export default function DiscoveryCall({ className = '', animationProgress, imageAnimationProgress }: DiscoveryCallProps) {
-  // First card image stays static - no animation
+const DiscoveryCall = ({ isMobile, animationProgress, imageAnimationProgress }: DiscoveryCallProps) => {
+  if (isMobile) {
+    return (
+      <>
+        <div className={styles.cardNumber}>01</div>
+        <div className={styles.cardContent}>
+          <div className={styles.cardTitle}>Discovery Call</div>
+          <div className={styles.cardSubtitle}>
+            We learn your process, pain points, and tools.
+          </div>
+          <div className={styles.cardDescription}>
+            Start with a personalized discovery call where we learn about your unique workflows, current tools, and key challenges.<br/><br/>
+            This step helps us map out where automation can bring the most value to your daily operations.
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  const imageX = useTransform(imageAnimationProgress, [0, 0.5], [100, 0]);
+  const imageOpacity = useTransform(imageAnimationProgress, [0, 0.3], [0, 1]);
 
   return (
     <div 
-      className={`w-[1440px] h-[636px] overflow-hidden relative ${className}`}
+      className="w-[1440px] h-[636px] overflow-hidden relative"
       style={{ backgroundColor: '#414149', borderRadius: '28px' }}
     >
       {/* Orange Accent Border */}
@@ -25,12 +46,13 @@ export default function DiscoveryCall({ className = '', animationProgress, image
         <div 
           className="absolute flex items-center justify-center"
           style={{
-            right: '30px',
+            right: '40px',
             top: '0px',
             width: '400px',
             height: '636px',
             color: '#36363E',
             fontSize: '400px',
+            marginRight: '30px',
             fontWeight: 700,
             fontFamily: 'Inter, sans-serif',
             zIndex: 1
@@ -63,7 +85,8 @@ export default function DiscoveryCall({ className = '', animationProgress, image
               marginBottom: '16px',
               width: '521px'
             }}>
-              We learn your process,<br />pain points, and tools.
+              We learn your process,<br />
+              pain points, and tools.
             </p>
             
             <p style={{ 
@@ -74,36 +97,39 @@ export default function DiscoveryCall({ className = '', animationProgress, image
               wordWrap: 'break-word',
               width: '440px'
             }}>
-              Start with a personalized discovery call where we learn about your unique workflows, current tools, and key challenges. <br/><br/>This step helps us map out where automation can bring the most value to your daily operations.
+              Start with a personalized discovery call where we learn about your unique workflows, current tools, and key challenges.<br /><br />
+              This step helps us map out where automation can bring the most value to your daily operations.
             </p>
           </div>
         </div>
         
-        {/* Right Side with Static Image */}
+        {/* Right Side with Animated Image */}
         <div 
           className="relative" 
           style={{ 
             width: '1200px', 
             height: '636px', 
-            marginRight: '190px', 
+            marginRight: '300px', 
             zIndex: 3 
           }}
         >
-          <Image 
+          <motion.img 
             src="/Assets/Breakdown/Discovery_call.png" 
-            alt="Professional woman on a discovery call"
-            width={1200}
-            height={636}
+            alt="Professional on a discovery call"
             style={{ 
               width: 'auto',
               height: '636px',
               position: 'absolute',
-              right: 0,
-              top: 0
+              right: '50px',
+              top: 0,
+              x: imageX,
+              opacity: imageOpacity
             }}
           />
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default DiscoveryCall;

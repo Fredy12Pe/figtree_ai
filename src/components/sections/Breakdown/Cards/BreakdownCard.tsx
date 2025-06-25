@@ -1,87 +1,169 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useTransform, MotionValue } from 'framer-motion';
 import styles from '../Breakdown.module.css';
 
 interface BreakdownCardProps {
-  CardComponent: React.ComponentType<{ animationProgress: MotionValue<number>; imageAnimationProgress: MotionValue<number> }>;
+  CardComponent: React.ComponentType<{ animationProgress: MotionValue<number>; imageAnimationProgress: MotionValue<number>; isMobile?: boolean }>;
   scrollYProgress: MotionValue<number>;
   index: number;
 }
 
 const BreakdownCard = ({ CardComponent, scrollYProgress, index }: BreakdownCardProps) => {
-  // Cards complete by 75% of scroll, leaving 25% for pause
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Create all motion values first
   const cardProgress = useTransform(scrollYProgress, 
-    [index * 0.25, (index + 1) * 0.25], 
+    index === 0 
+      ? [0, 0.25] 
+      : index === 2 // Last card
+        ? [0.5, 0.75]
+        : [index * 0.25, (index + 1) * 0.25], 
     [0, 1]
   );
 
-  // Image animation timing based on card position
-  let imageProgress;
-  if (index === 0) {
-    // First card: Only animate when coming back from second card (scrolling up)
-    imageProgress = useTransform(scrollYProgress,
-      [0.15, 0.25], // Only in the transition zone from card 2 back to card 1
-      [0, 1]        // Animate in when scrolling up
-    );
-  } else {
-    // Other cards: Image animates when previous card is 90% faded
-    imageProgress = useTransform(scrollYProgress,
-      [Math.max(0, (index - 0.1) * 0.25), (index + 1) * 0.25],
-      [0, 1]
+  const imageProgress = useTransform(scrollYProgress,
+    index === 0 
+      ? [0, 0.25]
+      : index === 2 // Last card
+        ? [0.5, 0.75]
+        : [Math.max(0, (index - 0.1) * 0.25), (index + 1) * 0.25],
+    [0, 1]
+  );
+
+  // Mobile animation values
+  const mobileOpacity = useTransform(cardProgress, 
+    index === 0
+      ? [0, 0.7, 0.85]
+      : index === 2 // Last card
+        ? [0, 0.1, 1]
+        : [0, 0.1, 0.7, 0.85], 
+    index === 0
+      ? [1, 1, 0]
+      : index === 2 // Last card
+        ? [0, 1, 1]
+        : [0, 1, 1, 0]
+  );
+  
+  const mobileScale = useTransform(cardProgress,
+    index === 0
+      ? [0, 0.7, 0.85]
+      : index === 2 // Last card
+        ? [0, 0.1, 1]
+        : [0, 0.1, 0.7, 0.85],
+    index === 0
+      ? [1, 1, 0.8]
+      : index === 2 // Last card
+        ? [0.8, 1, 1]
+        : [0.8, 1, 1, 0.8]
+  );
+  
+  const mobileY = useTransform(cardProgress,
+    index === 0
+      ? [0, 0.7, 0.85]
+      : index === 2 // Last card
+        ? [0, 0.1, 1]
+        : [0, 0.1, 0.7, 0.85],
+    index === 0
+      ? [0, 0, -100]
+      : index === 2 // Last card
+        ? [100, 0, 0]
+        : [100, 0, 0, -100]
+  );
+
+  // Desktop animation values
+  const desktopY = useTransform(cardProgress, 
+    index === 2 // Last card
+      ? [0, 0.7]
+      : [0, 0.7, 1], 
+    index === 2 // Last card
+      ? [0, 0]
+      : [0, 0, -200]
+  );
+  
+  const desktopScale = useTransform(cardProgress, 
+    index === 2 // Last card
+      ? [0, 0.7]
+      : [0, 0.7, 1], 
+    index === 2 // Last card
+      ? [1, 1]
+      : [1, 1, 0.8]
+  );
+  
+  const desktopOpacity = useTransform(cardProgress, 
+    index === 2 // Last card
+      ? [0, 0.7]
+      : [0, 0.7, 0.85, 1], 
+    index === 2 // Last card
+      ? [1, 1]
+      : [1, 1, 0.5, 0]
+  );
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1023);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const cardContent = (
+    <CardComponent 
+      animationProgress={cardProgress} 
+      imageAnimationProgress={imageProgress}
+      isMobile={isMobile}
+    />
+  );
+
+  if (isMobile) {
+    return (
+      <motion.div
+        className={styles.card}
+        style={{ 
+          opacity: mobileOpacity,
+          scale: mobileScale,
+          y: mobileY,
+          zIndex: 3 - index,
+          height: '561px'
+        }}
+      >
+        {cardContent}
+      </motion.div>
     );
   }
 
-  // Last card should stay visible for longer during the pause period
   if (index === 2) {
-    // Card 3: Stay fully visible until 90% scroll, then fade out
-    const y = 0;
-    const scale = 1;
-    const opacity = useTransform(scrollYProgress, [0.75, 0.9, 1], [1, 1, 0]);
-    
     return (
       <motion.div
         key={index}
         className={styles.card}
         style={{ 
-          y, 
-          scale, 
-          opacity,
+          y: 0, 
+          scale: 1, 
+          opacity: desktopOpacity,
           zIndex: 3 - index 
         }}
       >
-        <CardComponent 
-          animationProgress={cardProgress} 
-          imageAnimationProgress={imageProgress}
-        />
+        {cardContent}
       </motion.div>
     );
   }
-  
-  // Cards 1 & 2: Normal timing
-  const pausePoint = 0.7;
-  const fadeStart = 0.85;
-  
-  const y = useTransform(cardProgress, [0, pausePoint, 1], [0, 0, -200]);
-  const scale = useTransform(cardProgress, [0, pausePoint, 1], [1, 1, 0.8]);
-  const opacity = useTransform(cardProgress, [0, pausePoint, fadeStart, 1], [1, 1, 0.5, 0]);
 
   return (
     <motion.div
       key={index}
       className={styles.card}
       style={{ 
-        y, 
-        scale, 
-        opacity,
+        y: desktopY, 
+        scale: desktopScale, 
+        opacity: desktopOpacity,
         zIndex: 3 - index 
       }}
     >
-      <CardComponent 
-        animationProgress={cardProgress} 
-        imageAnimationProgress={imageProgress}
-      />
+      {cardContent}
     </motion.div>
   );
 };

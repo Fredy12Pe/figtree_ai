@@ -1,18 +1,40 @@
+"use client";
+
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
+import styles from '../Breakdown.module.css';
 
 interface GoLiveProps {
-  className?: string;
+  animationProgress: MotionValue<number>;
   imageAnimationProgress: MotionValue<number>;
+  isMobile?: boolean;
 }
 
-export default function GoLive({ className = '', imageAnimationProgress }: GoLiveProps) {
+const GoLive = ({ isMobile, animationProgress, imageAnimationProgress }: GoLiveProps) => {
+  if (isMobile) {
+    return (
+      <>
+        <div className={styles.cardNumber}>03</div>
+        <div className={styles.cardContent}>
+          <div className={styles.cardTitle}>Go live in 2-4 weeks</div>
+          <div className={styles.cardSubtitle}>
+            Launch your automation system. Win back your focus. Save time.
+          </div>
+          <div className={styles.cardDescription}>
+            Your automation system is fully implemented and launched within 2-4 weeks.<br/><br/>
+            We provide onboarding support and refinements, so you can shift your focus from repetitive tasks to higher-impact work, fast.
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const imageX = useTransform(imageAnimationProgress, [0, 0.5], [100, 0]);
   const imageOpacity = useTransform(imageAnimationProgress, [0, 0.3], [0, 1]);
 
   return (
     <div 
-      className={`w-[1440px] h-[636px] overflow-hidden relative ${className}`}
+      className="w-[1440px] h-[636px] overflow-hidden relative"
       style={{ backgroundColor: '#E5CEB9', borderRadius: '28px' }}
     >
       {/* Orange Accent Border */}
@@ -63,7 +85,8 @@ export default function GoLive({ className = '', imageAnimationProgress }: GoLiv
               marginBottom: '16px',
               width: '521px'
             }}>
-              Launch your automation system.<br />Win back your focus. Save time.
+              Launch your automation system.<br />
+              Win back your focus. Save time.
             </p>
             
             <p style={{ 
@@ -74,7 +97,8 @@ export default function GoLive({ className = '', imageAnimationProgress }: GoLiv
               wordWrap: 'break-word',
               width: '440px'
             }}>
-              Your automation system is fully implemented and launched within 2-4 weeks. <br/><br/>We provide onboarding support and refinements, so you can shift your focus from repetitive tasks to higher-impact work, fast.
+              Your automation system is fully implemented and launched within 2-4 weeks.<br /><br />
+              We provide onboarding support and refinements, so you can shift your focus from repetitive tasks to higher-impact work, fast.
             </p>
           </div>
         </div>
@@ -85,18 +109,18 @@ export default function GoLive({ className = '', imageAnimationProgress }: GoLiv
           style={{ 
             width: '1200px', 
             height: '636px', 
-            marginRight: '370px', 
+            marginRight: '360px', 
             zIndex: 3 
           }}
         >
           <motion.img 
             src="/Assets/Breakdown/Go_live.png" 
-            alt="Professional woman with tablet ready to go live"
+            alt="Professional woman monitoring automation performance"
             style={{ 
               width: 'auto',
               height: '636px',
               position: 'absolute',
-              right: 0,
+              right: '50px',
               top: 0,
               x: imageX,
               opacity: imageOpacity
@@ -106,4 +130,6 @@ export default function GoLive({ className = '', imageAnimationProgress }: GoLiv
       </div>
     </div>
   );
-}
+};
+
+export default GoLive;

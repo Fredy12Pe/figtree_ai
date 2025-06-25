@@ -1,18 +1,40 @@
+"use client";
+
 import React from 'react';
 import { motion, MotionValue, useTransform } from 'framer-motion';
+import styles from '../Breakdown.module.css';
 
 interface AutomationProps {
-  className?: string;
+  animationProgress: MotionValue<number>;
   imageAnimationProgress: MotionValue<number>;
+  isMobile?: boolean;
 }
 
-export default function Automation({ className = '', imageAnimationProgress }: AutomationProps) {
+const Automation = ({ isMobile, animationProgress, imageAnimationProgress }: AutomationProps) => {
+  if (isMobile) {
+    return (
+      <>
+        <div className={styles.cardNumber}>02</div>
+        <div className={styles.cardContent}>
+          <div className={styles.cardTitle}>Automation Build</div>
+          <div className={styles.cardSubtitle}>
+            We design and build custom automations based on your goals.
+          </div>
+          <div className={styles.cardDescription}>
+            We design and build custom automation systems tailored to your business goals.<br/><br/>
+            From lead follow-ups to CRM syncing, every workflow is crafted to save you time and streamline your process, without disrupting what already works.
+          </div>
+        </div>
+      </>
+    );
+  }
+
   const imageX = useTransform(imageAnimationProgress, [0, 0.5], [100, 0]);
   const imageOpacity = useTransform(imageAnimationProgress, [0, 0.3], [0, 1]);
 
   return (
     <div 
-      className={`w-[1440px] h-[636px] overflow-hidden relative ${className}`}
+      className={`w-[1440px] h-[636px] overflow-hidden relative`}
       style={{ backgroundColor: '#EF7822', borderRadius: '28px' }}
     >
       {/* Orange Accent Border */}
@@ -63,7 +85,8 @@ export default function Automation({ className = '', imageAnimationProgress }: A
               marginBottom: '16px',
               width: '521px'
             }}>
-              We design and build custom<br />automations based on your goals.
+              We design and build custom<br />
+              automations based on your goals.
             </p>
             
             <p style={{ 
@@ -74,7 +97,8 @@ export default function Automation({ className = '', imageAnimationProgress }: A
               wordWrap: 'break-word',
               width: '440px'
             }}>
-              We design and build custom automation systems tailored to your business goals. <br/><br/>From lead follow-ups to CRM syncing, every workflow is crafted to save you time and streamline your process, without disrupting what already works.
+              We design and build custom automation systems tailored to your business goals.<br /><br />
+              From lead follow-ups to CRM syncing, every workflow is crafted to save you time and streamline your process, without disrupting what already works.
             </p>
           </div>
         </div>
@@ -106,4 +130,6 @@ export default function Automation({ className = '', imageAnimationProgress }: A
       </div>
     </div>
   );
-}
+};
+
+export default Automation;
