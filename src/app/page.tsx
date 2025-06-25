@@ -1,5 +1,5 @@
 import HeaderWrapper from '@/components/sections/HeaderWrapper'
-import Impact from '@/components/sections/Impact'
+import ImpactWrapper from '@/components/sections/Impact'
 import Breakdown from '@/components/sections/Breakdown'
 import AutomationExplainer from '@/components/sections/AutomationExplainer'
 import VideoExplainerSection from '@/components/sections/AutomationExplainer/VideoExplainerSection'
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <HeaderWrapper />
-      <Impact />
+      <ImpactWrapper />
       <Breakdown />
       <AutomationExplainer />
       <VideoExplainerSection />

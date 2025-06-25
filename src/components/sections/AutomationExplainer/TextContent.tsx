@@ -4,23 +4,41 @@ import Description from './Description';
 
 interface TextContentProps {
   className?: string;
+  isMobile?: boolean;
 }
 
-export default function TextContent({ className = '' }: TextContentProps) {
+export default function TextContent({ className = '', isMobile = false }: TextContentProps) {
   return (
     <div 
-      className={`flex-[0_0_auto] ${className}`} 
+      className={`${isMobile ? 'w-full' : 'flex-[0_0_auto]'} ${className}`} 
       style={{ 
-        width: '455px',
-        height: '877px', // Total grid height (279px × 3 + 20px × 2)
-        position: 'relative'
+        width: isMobile ? '100%' : '455px',
+        height: isMobile ? 'auto' : '877px',
+        position: 'relative',
+        ...(isMobile && {
+          paddingLeft: '36px',
+          paddingTop: '36px'
+        })
       }}
     >
-      <div style={{ position: 'absolute', top: 0 }}>
-        <Heading />
+      <div 
+        style={{ 
+          position: isMobile ? 'relative' : 'absolute', 
+          top: 0,
+          maxWidth: isMobile ? '356px' : 'none'
+        }}
+      >
+        <Heading isMobile={isMobile} />
       </div>
-      <div style={{ position: 'absolute', bottom: 0 }}>
-        <Description />
+      <div 
+        style={{ 
+          position: isMobile ? 'relative' : 'absolute', 
+          bottom: isMobile ? 'auto' : 0,
+          marginTop: isMobile ? '24px' : 0,
+          maxWidth: isMobile ? '358px' : 'none'
+        }}
+      >
+        <Description isMobile={isMobile} />
       </div>
     </div>
   );

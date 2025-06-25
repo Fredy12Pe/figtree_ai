@@ -14,24 +14,10 @@ const LogoCard: React.FC<LogoCardProps> = ({ className = '' }) => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleTimeUpdate = () => {
-      if (video.currentTime >= 7) {
-        video.currentTime = 1.5;
-      }
-    };
-
-    const handleEnded = () => {
-      video.currentTime = 1.5;
-      video.play();
-    };
-
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('ended', handleEnded);
-    
-    return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('ended', handleEnded);
-    };
+    // Start playing the video
+    video.play().catch(error => {
+      console.log("Video autoplay failed:", error);
+    });
   }, []);
 
   const handleMouseEnter = () => {
@@ -62,6 +48,8 @@ const LogoCard: React.FC<LogoCardProps> = ({ className = '' }) => {
       <video
         ref={videoRef}
         muted
+        loop
+        autoPlay
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
         style={{

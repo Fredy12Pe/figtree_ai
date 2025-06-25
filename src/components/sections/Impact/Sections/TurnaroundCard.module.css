@@ -9,7 +9,7 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  padding: 24px;
+  padding: 16px;
 }
 
 .card:hover {
@@ -58,5 +58,30 @@
 @media (min-width: 768px) {
   .largeTitle {
     font-size: 34px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 1023px) {
+  .card {
+    padding: 36px;
+  }
+
+  .contentWrapper {
+    margin-right: 36px;
+  }
+
+  .headingSection {
+    margin-bottom: 20px;
+  }
+
+  .cardTitle {
+    font-size: 13px;
+    margin-bottom: 6px;
+    opacity: 0.8;
+  }
+
+  .largeTitle {
+    font-size: 26px;
   }
 } 
