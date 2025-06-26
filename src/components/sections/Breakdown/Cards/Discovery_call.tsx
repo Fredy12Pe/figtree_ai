@@ -37,96 +37,90 @@ const DiscoveryCall = ({ isMobile, animationProgress, imageAnimationProgress }: 
       className="w-[1440px] h-[636px] overflow-hidden relative"
       style={{ backgroundColor: '#414149', borderRadius: '28px' }}
     >
-      {/* Orange Accent Border */}
-      <div className="h-2 bg-orange-500"></div>
-      
-      {/* Card Content */}
-      <div className="h-full flex relative">
+      <div className="flex items-start justify-between w-full h-full relative">
+        {/* Left Content */}
+        <div className="relative flex flex-col" style={{ padding: '80px 40px 0 80px', maxWidth: '600px', zIndex: 2 }}>
+          <h3 style={{ 
+            color: 'white',
+            fontSize: '64px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 600,
+            lineHeight: '1.1',
+            marginBottom: '32px'
+          }}>
+            Discovery<br/>Call
+          </h3>
+          
+          <p style={{ 
+            color: 'white',
+            fontSize: '32px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 500,
+            lineHeight: '1.3',
+            marginBottom: '24px'
+          }}>
+            We learn your process,<br/>
+            pain points, and tools.
+          </p>
+          
+          <p style={{ 
+            color: 'white',
+            fontSize: '18px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 400,
+            lineHeight: '1.6',
+            opacity: 0.8,
+            maxWidth: '480px'
+          }}>
+            Start with a personalized discovery call where we learn about your unique workflows, current tools, and key challenges.<br/><br/>
+            This step helps us map out where automation can bring the most value to your daily operations.
+          </p>
+        </div>
+
         {/* Background Number */}
         <div 
-          className="absolute flex items-center justify-center"
           style={{
-            right: '40px',
-            top: '0px',
-            width: '400px',
-            height: '636px',
+            position: 'absolute',
+            right: '0px',
+            top: '50%',
+            transform: 'translateY(-50%)',
             color: '#36363E',
             fontSize: '400px',
-            marginRight: '30px',
             fontWeight: 700,
             fontFamily: 'Inter, sans-serif',
-            zIndex: 1
+            opacity: 0.4,
+            zIndex: 1,
+            lineHeight: '1'
           }}
         >
           01
         </div>
 
-        {/* Left Content */}
-        <div className="text-white flex items-center" style={{ paddingLeft: '78px', width: '954px', zIndex: 2, position: 'relative' }}>
-          <div>
-            <h3 className="font-semibold" style={{ 
-              fontSize: '74px', 
-              lineHeight: 'auto', 
-              letterSpacing: '0%',
-              fontWeight: 700,
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '20px',
-              color: 'white'
-            }}>
-              Discovery<br />Call
-            </h3>
-            
-            <p style={{ 
-              color: 'white',
-              fontSize: '24px',
-              fontFamily: 'Inter',
-              fontWeight: 500,
-              wordWrap: 'break-word',
-              marginBottom: '16px',
-              width: '521px'
-            }}>
-              We learn your process,<br />
-              pain points, and tools.
-            </p>
-            
-            <p style={{ 
-              color: 'white',
-              fontSize: '18px',
-              fontFamily: 'Inter',
-              fontWeight: 400,
-              wordWrap: 'break-word',
-              width: '440px'
-            }}>
-              Start with a personalized discovery call where we learn about your unique workflows, current tools, and key challenges.<br /><br />
-              This step helps us map out where automation can bring the most value to your daily operations.
-            </p>
-          </div>
-        </div>
-        
-        {/* Right Side with Animated Image */}
-        <div 
+        {/* Right Side with Image */}
+        <motion.div 
           className="relative" 
           style={{ 
-            width: '1200px', 
-            height: '636px', 
-            marginRight: '300px', 
-            zIndex: 3 
+            position: 'absolute',
+            left: '580px',
+            top: 0,
+            width: '565px',
+            height: '636px',
+            zIndex: 2
           }}
         >
           <motion.img 
             src="/Assets/Breakdown/Discovery_call.png" 
             alt="Professional on a discovery call"
             style={{ 
-              width: 'auto',
+              width: '565px',
               height: '636px',
-              position: 'absolute',
-              right: '50px',
-              top: 0,
+              objectFit: 'contain',
+              objectPosition: 'center',
               x: imageX,
               opacity: imageOpacity
             }}
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

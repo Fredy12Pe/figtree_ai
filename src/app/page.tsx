@@ -10,16 +10,20 @@ import Footer from '@/components/sections/Footer/Footer'
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <HeaderWrapper />
-      <ImpactWrapper />
-      <Breakdown />
-      <AutomationExplainer />
-      <VideoExplainerSection />
-      <ScrollBanner />
-      <FAQ />
-      <ContactWrapper />
-      <Footer />
+    <main className="relative w-full">
+      <div className="flex flex-col w-full">
+        <HeaderWrapper />
+        <ImpactWrapper />
+        <div className="relative z-0 w-full overflow-visible">
+          <Breakdown />
+        </div>
+        <AutomationExplainer />
+        <VideoExplainerSection />
+        <ScrollBanner />
+        <FAQ />
+        <ContactWrapper />
+        <Footer />
+      </div>
     </main>
   )
 }

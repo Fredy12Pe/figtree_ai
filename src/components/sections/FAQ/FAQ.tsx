@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './FAQ.module.css';
 import {
   Clock,
@@ -10,9 +10,10 @@ import {
   Lock,
   Wrench,
   Target,
-  TrendingUp
+  TrendingUp,
+  ChevronDown
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface FAQItem {
   question: string;
@@ -64,6 +65,79 @@ const faqData: FAQItem[] = [
 ];
 
 const FAQ = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const toggleQuestion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  if (isMobile) {
+    return (
+      <section className={styles.mobileContainer}>
+        <div className={styles.mobileContent}>
+          <div className={styles.mobileHeader}>
+            <h2 className={styles.mobileTitle}>
+              Frequently Asked Questions
+            </h2>
+            <p className={styles.mobileSubtitle}>
+              Quick answers to questions you may have.
+            </p>
+          </div>
+          
+          <div className={styles.mobileFaqList}>
+            {faqData.map((item, index) => (
+              <motion.div 
+                key={index}
+                className={styles.mobileFaqItem}
+                initial={false}
+              >
+                <button
+                  className={`${styles.mobileQuestionButton} ${openIndex === index ? styles.active : ''}`}
+                  onClick={() => toggleQuestion(index)}
+                >
+                  <div className={styles.mobileQuestionContent}>
+                    <span className={styles.mobileIconContainer}>
+                      {item.icon}
+                    </span>
+                    <span className={styles.mobileQuestion}>{item.question}</span>
+                  </div>
+                  <ChevronDown 
+                    className={`${styles.chevron} ${openIndex === index ? styles.rotate : ''}`}
+                  />
+                </button>
+                
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className={styles.mobileAnswerContainer}
+                    >
+                      <p className={styles.mobileAnswer}>{item.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-white py-[120px] flex justify-center">
       <div className="max-w-[1440px] w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">

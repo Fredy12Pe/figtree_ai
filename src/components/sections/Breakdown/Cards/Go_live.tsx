@@ -18,7 +18,8 @@ const GoLive = ({ isMobile, animationProgress, imageAnimationProgress }: GoLiveP
         <div className={styles.cardContent}>
           <div className={styles.cardTitle}>Go live in 2-4 weeks</div>
           <div className={styles.cardSubtitle}>
-            Launch your automation system. Win back your focus. Save time.
+            Launch your automation system.<br/>
+            Win back your focus. Save time.
           </div>
           <div className={styles.cardDescription}>
             Your automation system is fully implemented and launched within 2-4 weeks.<br/><br/>
@@ -37,96 +38,90 @@ const GoLive = ({ isMobile, animationProgress, imageAnimationProgress }: GoLiveP
       className="w-[1440px] h-[636px] overflow-hidden relative"
       style={{ backgroundColor: '#E5CEB9', borderRadius: '28px' }}
     >
-      {/* Orange Accent Border */}
-      <div className="h-2 bg-orange-500"></div>
-      
-      {/* Card Content */}
-      <div className="h-full flex relative">
+      <div className="flex items-start justify-between w-full h-full relative">
+        {/* Left Content */}
+        <div className="relative flex flex-col" style={{ padding: '80px 0 0 80px', maxWidth: '600px', zIndex: 2 }}>
+          <h3 style={{ 
+            color: 'white',
+            fontSize: '64px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 600,
+            lineHeight: '1.1',
+            marginBottom: '32px'
+          }}>
+            Go live in<br/>2-4 weeks
+          </h3>
+          
+          <p style={{ 
+            color: 'white',
+            fontSize: '32px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 500,
+            lineHeight: '1.3',
+            marginBottom: '24px'
+          }}>
+            Launch your automation system.<br/>
+            Win back your focus. Save time.
+          </p>
+          
+          <p style={{ 
+            color: 'white',
+            fontSize: '18px',
+            fontFamily: 'Inter, sans-serif',
+            fontWeight: 400,
+            lineHeight: '1.6',
+            opacity: 0.8,
+            maxWidth: '480px'
+          }}>
+            Your automation system is fully implemented and launched within 2-4 weeks.<br/><br/>
+            We provide onboarding support and refinements, so you can shift your focus from repetitive tasks to higher-impact work, fast.
+          </p>
+        </div>
+
         {/* Background Number */}
         <div 
-          className="absolute flex items-center justify-center"
           style={{
-            right: '40px',
-            top: '0px',
-            width: '400px',
-            height: '636px',
+            position: 'absolute',
+            right: '0px',
+            top: '50%',
+            transform: 'translateY(-50%)',
             color: '#D9C1AB',
             fontSize: '400px',
-            marginRight: '30px',
             fontWeight: 700,
             fontFamily: 'Inter, sans-serif',
-            zIndex: 1
+            opacity: 0.6,
+            zIndex: 1,
+            lineHeight: '1'
           }}
         >
           03
         </div>
 
-        {/* Left Content */}
-        <div className="text-white flex items-center" style={{ paddingLeft: '78px', width: '954px', zIndex: 2, position: 'relative' }}>
-          <div>
-            <h3 className="font-semibold" style={{ 
-              fontSize: '74px', 
-              lineHeight: 'auto', 
-              letterSpacing: '0%',
-              fontWeight: 700,
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '20px',
-              color: 'white'
-            }}>
-              Go live in<br />2-4 weeks
-            </h3>
-            
-            <p style={{ 
-              color: 'white',
-              fontSize: '24px',
-              fontFamily: 'Inter',
-              fontWeight: 500,
-              wordWrap: 'break-word',
-              marginBottom: '16px',
-              width: '521px'
-            }}>
-              Launch your automation system.<br />
-              Win back your focus. Save time.
-            </p>
-            
-            <p style={{ 
-              color: 'white',
-              fontSize: '18px',
-              fontFamily: 'Inter',
-              fontWeight: 400,
-              wordWrap: 'break-word',
-              width: '440px'
-            }}>
-              Your automation system is fully implemented and launched within 2-4 weeks.<br /><br />
-              We provide onboarding support and refinements, so you can shift your focus from repetitive tasks to higher-impact work, fast.
-            </p>
-          </div>
-        </div>
-        
-        {/* Right Side with Animated Image */}
-        <div 
+        {/* Right Side with Image */}
+        <motion.div 
           className="relative" 
           style={{ 
-            width: '1200px', 
-            height: '636px', 
-            marginRight: '360px', 
-            zIndex: 3 
+            position: 'absolute',
+            left: '560px',
+            top: 0,
+            width: '493px',
+            height: '636px',
+            zIndex: 2
           }}
         >
           <motion.img 
             src="/Assets/Breakdown/Go_live.png" 
-            alt="Professional woman monitoring automation performance"
+            alt="Professional monitoring automation performance"
             style={{ 
-              width: 'auto',
+              width: '493px',
               height: '636px',
-              position: 'absolute',
-              right: '50px',
-              top: 0,
+              objectFit: 'contain',
+              objectPosition: 'center',
               x: imageX,
               opacity: imageOpacity
             }}
           />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

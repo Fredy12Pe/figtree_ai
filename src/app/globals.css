@@ -6,6 +6,7 @@ html {
   box-sizing: border-box;
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
+  height: 100%;
 }
 
 *, *:before, *:after {
@@ -14,12 +15,10 @@ html {
 
 html, body, #__next, #root {
   height: 100%;
-  min-height: 100vh;
   width: 100%;
   position: relative;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
 }
 
 body {
@@ -27,13 +26,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* Prevent pull-to-refresh and overscroll on mobile */
-  overscroll-behavior-y: none;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1 0 auto;
+  width: 100%;
+  position: relative;
 }
 
 /* Fix for mobile 100vh issue */
 @supports (-webkit-touch-callout: none) {
-  .h-screen {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+  
+  html {
     height: -webkit-fill-available;
   }
 }
@@ -41,6 +52,22 @@ body {
 /* Remove tap highlight on mobile */
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure proper mobile scaling */
+@media (max-width: 1023px) {
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  main {
+    width: 100%;
+  }
 }
 
 /* Removed !important to allow Tailwind to control color */

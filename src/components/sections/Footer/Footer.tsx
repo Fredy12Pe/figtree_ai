@@ -4,7 +4,7 @@ import styles from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-black text-sm h-[80px] flex items-center justify-center" style={{ backgroundColor: 'black' }}>
+    <footer className="w-full bg-black text-sm h-[80px] flex items-center justify-center rounded-t-[28px]" style={{ backgroundColor: 'black' }}>
       <div
         className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center"
         style={{ color: 'rgba(255, 255, 255, 0.4)'}}

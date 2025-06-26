@@ -1,30 +1,21 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 
 export default function ContactMobile() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: '',
     companyName: '',
     phoneNumber: '',
     message: '',
   });
 
-  const [viewportHeight, setViewportHeight] = useState('100vh')
-
-  useEffect(() => {
-    const updateHeight = () => {
-      setViewportHeight(`${window.innerHeight}px`)
-    }
-    updateHeight()
-    window.addEventListener('resize', updateHeight)
-    return () => window.removeEventListener('resize', updateHeight)
-  }, [])
-
-  const inputStyles = "w-full text-white rounded-[16px] px-6 py-5 h-[56px] bg-[#00050D]/20 border border-[#3A3A3A]/40 placeholder:text-white/50 placeholder:text-[16px]";
-  const textareaStyles = "w-full text-white rounded-[16px] px-6 py-5 min-h-[120px] bg-[#00050D]/20 border border-[#3A3A3A]/40 placeholder:text-white/50 placeholder:text-[16px] resize-none";
+  const labelStyles = "text-white text-[14px] font-inter mb-[10px]";
+  const inputStyles = "w-full h-[60px] rounded-[12px] pl-[14px] pr-6 text-white text-[14px] border border-[rgba(57.61,57.61,57.61,0.40)] bg-[rgba(0,4.86,12.96,0.20)] focus:outline-none focus:border-white/20 placeholder:text-white/50 placeholder:text-[14px] caret-white";
+  const textareaStyles = "w-full min-h-[120px] rounded-[12px] pl-[14px] pr-6 pt-[10px] pb-4 text-white text-[14px] border border-[rgba(57.61,57.61,57.61,0.40)] bg-[rgba(0,4.86,12.96,0.20)] focus:outline-none focus:border-white/20 resize-none placeholder:text-white/50 placeholder:text-[14px] caret-white";
+  const buttonStyles = "w-full h-[48px] p-[10px] bg-white rounded-[16px] outline outline-1 outline-white -outline-offset-1 flex justify-center items-center gap-[10px] text-black text-[14px] font-inter font-medium";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -53,7 +44,6 @@ export default function ContactMobile() {
       setFormData({
         firstName: '',
         lastName: '',
-        email: '',
         companyName: '',
         phoneNumber: '',
         message: '',
@@ -67,144 +57,124 @@ export default function ContactMobile() {
   };
 
   return (
-    <div className="relative w-full bg-black min-h-screen mb-[60px]">
-      <div className="w-full">
-        {/* Top Section with Video Background */}
-        <div className="relative w-full h-[400px]">
-          {/* Video */}
+    <div className="min-h-screen">
+      {/* Video Section */}
+      <div className="w-full h-[340px] overflow-hidden rounded-t-[28px]">
+        <div className="relative w-full h-full">
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="w-full h-full object-cover"
             src="/Assets/ImpactSections/Video_highlight/In_a_dark_202505221920.mp4"
             autoPlay
             loop
             muted
             playsInline
           />
-          {/* Gradient Overlay */}
           <div 
-            className="absolute inset-0 pointer-events-none w-full h-full z-[1]"
-            style={{ background: 'linear-gradient(180deg, #1B0B40 0%, #0E0E52 100%)' }}
+            className="absolute top-0 left-0 w-full h-full"
+            style={{ 
+              background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.80) 100%)',
+              borderTopLeftRadius: '28px',
+              borderTopRightRadius: '28px'
+            }}
           />
-          
-          {/* Content */}
-          <div className="relative z-10 flex flex-col h-full text-white px-6 pt-[60px]">
-            <div className="text-center">
-              <div className="w-full text-center text-white text-[32px] font-inter font-[600] mb-4" style={{ color: 'white' }}>
-                Book a free consultation
-              </div>
-              <div className="w-full text-center text-white text-[18px] font-inter font-normal max-w-[332px] mx-auto" style={{ color: 'white' }}>
-                Let us show you how AI-powered automation can save you time, reduce busywork, and scale your business.
-              </div>
-            </div>
-          </div>
         </div>
+      </div>
 
-        {/* Form Section */}
-        <div className="w-full bg-[#161618] px-6 py-10">
-          <form onSubmit={handleSubmit} className="w-full space-y-[24px]">
-            {/* First Name and Last Name row */}
-            <div className="flex flex-col space-y-[24px]">
-              <div>
-                <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                  First Name
-                </div>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required
-                  placeholder="John"
-                  className={inputStyles}
-                />
-              </div>
+      {/* Form Section */}
+      <div className="bg-[#000000] rounded-b-[28px]">
+        <div className="px-[26px] pt-12 pb-[20px]">
+          {/* Heading */}
+          <div className="pt-[10px]">
+            <h1 className="text-[28px] font-[600] mb-4 max-w-[338px] mx-auto text-center" style={{ color: 'white' }}>
+              Book a free consultation
+            </h1>
+            <p className="text-[16px] mb-[48px] max-w-[338px] mx-auto text-center" style={{ color: 'white' }}>
+              Let us show you how AI-powered automation can save you time, reduce busywork, and scale your business.
+            </p>
+          </div>
 
-              <div>
-                <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                  Last Name
-                </div>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  required
-                  placeholder="Doe"
-                  className={inputStyles}
-                />
-              </div>
-            </div>
-
+          <form onSubmit={handleSubmit} className="space-y-[18px]">
             <div>
-              <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                Email
-              </div>
+              <label className={labelStyles} style={{ color: 'white', marginBottom: '10px', display: 'block' }}>First Name</label>
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                name="firstName"
+                value={formData.firstName}
                 onChange={handleChange}
                 required
-                placeholder="johndoe@gmail.com"
+                placeholder="John"
                 className={inputStyles}
+                style={{ color: 'white' }}
               />
             </div>
 
-            {/* Company Name and Phone Number in separate rows for mobile */}
-            <div className="space-y-[24px]">
-              <div>
-                <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                  Company Name
-                </div>
-                <input
-                  type="text"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                  placeholder="JohnDoe Real Estate Agency"
-                  className={inputStyles}
-                />
-              </div>
-
-              <div>
-                <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                  Phone Number
-                </div>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  placeholder="(343)786-8723"
-                  className={inputStyles}
-                />
-              </div>
+            <div>
+              <label className={labelStyles} style={{ color: 'white', marginBottom: '10px', display: 'block' }}>Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                placeholder="Doe"
+                className={inputStyles}
+                style={{ color: 'white' }}
+              />
             </div>
 
             <div>
-              <div className="w-full text-white text-[18px] font-inter font-medium mb-[14px]">
-                What would you like to automate?
-              </div>
+              <label className={labelStyles} style={{ color: 'white', marginBottom: '10px', display: 'block' }}>Company Name</label>
+              <input
+                type="text"
+                name="companyName"
+                value={formData.companyName}
+                onChange={handleChange}
+                placeholder="JohnDoe Real Estate Agency"
+                className={inputStyles}
+                style={{ color: 'white' }}
+              />
+            </div>
+
+            <div>
+              <label className={labelStyles} style={{ color: 'white', marginBottom: '10px', display: 'block' }}>Phone Number</label>
+              <input
+                type="tel"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                placeholder="(343)786-8723"
+                className={inputStyles}
+                style={{ color: 'white' }}
+              />
+            </div>
+
+            <div>
+              <label className={labelStyles} style={{ color: 'white', marginBottom: '10px', display: 'block' }}>What would you like to Automate?</label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Automating CRM updates...."
-                rows={4}
                 className={textareaStyles}
+                style={{ color: 'white' }}
               />
             </div>
 
-            <button
-              type="submit"
-              style={{ backgroundColor: 'white', color: 'black' }}
-              className="w-full h-[56px] rounded-[16px] font-semibold opacity-86 hover:opacity-100 transition-all"
-            >
-              Get Connected
-            </button>
+            <div className="mt-[18px] mb-[40px]">
+              <button
+                type="submit"
+                style={{ backgroundColor: 'white', borderRadius: '16px' }}
+                className="w-full h-[48px] text-black text-[14px] font-medium font-inter"
+              >
+                Get Connected
+              </button>
+            </div>
           </form>
         </div>
       </div>
+
+      {/* White gap */}
+      <div className="h-[80px] bg-white" />
     </div>
   );
 } 

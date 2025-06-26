@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   viewport: {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
+    maximumScale: 5,
+    userScalable: true,
   },
   robots: 'index, follow',
 }
@@ -28,11 +28,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="scroll-smooth">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
       </head>
-      <body className={`${inter.className} h-full min-h-screen overflow-x-hidden`}>{children}</body>
+      <body className={`${inter.className} min-h-screen flex flex-col`}>{children}</body>
     </html>
   )
 }

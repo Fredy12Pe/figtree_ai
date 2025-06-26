@@ -45,7 +45,7 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
 
         <div className={styles.titleSection}>
           <h2 className={styles.sectionTitle}>
-            How it works
+            How It Works
           </h2>
         </div>
 
@@ -55,8 +55,8 @@ const Breakdown = ({ className = '' }: BreakdownProps) => {
               <BreakdownCard
                 key={index}
                 CardComponent={CardComponent}
-                index={index}
                 scrollYProgress={scrollYProgress}
+                index={index}
               />
             ))}
           </div>
