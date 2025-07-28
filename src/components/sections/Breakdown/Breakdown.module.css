@@ -1,74 +1,56 @@
 .container {
-  height: 400vh; /* Extra height for pause after last card */
+  height: 300vh;
   position: relative;
-  background: #000;
+  margin-top: 60px;
 }
 
 .stickyArea {
   position: sticky;
   top: 0;
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-}
-
-.titleSection {
-  padding: 176px 240px 0 240px;
-  z-index: 3;
-}
-
-.sectionTitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  color: black;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.viewport {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .backgroundImage {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  z-index: 1;
+  z-index: -1;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+}
+
+.titleSection {
+  padding-top: 5rem; 
+  z-index: 10;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: 3.75rem; /* 60px */
+  line-height: 1;
+  font-weight: 600;
+  text-align: center;
+  color: black;
+  margin: 0;
 }
 
 .cardContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 100%;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.card {
-  position: absolute;
-  width: 1440px;
-  height: 636px;
-  max-width: 90vw;
-  max-height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cardTop {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  width: 400px;
+  height: 561px;
+  pointer-events: none;
+  margin-top: -5rem; /* Adjust to pull cards up */
 } 

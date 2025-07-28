@@ -1,100 +1,54 @@
 "use client";
 import React from 'react';
-import { useRef, useEffect } from 'react';
-import { motion, MotionValue } from 'framer-motion';
 
-interface LogoCardProps {
-  className?: string;
-}
-
-const LogoCard: React.FC<LogoCardProps> = ({ className = '' }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const handleTimeUpdate = () => {
-      if (video.currentTime >= 7) {
-        video.currentTime = 1.5;
-      }
-    };
-
-    const handleEnded = () => {
-      video.currentTime = 1.5;
-      video.play();
-    };
-
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('ended', handleEnded);
-    
-    return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('ended', handleEnded);
-    };
-  }, []);
-
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 1.5;
-      videoRef.current.play();
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 1.5;
-    }
-  };
-
+export default function LogoCard({ className = '' }) {
+  console.log('LogoCard rendering', className);
+  
+  // Determine tablet sizing based on className
+  const isTabletBottomCard = className.includes('tablet-bottom-card');
+  
+  // Define tablet-specific styles
+  const tabletCardStyle = isTabletBottomCard ? {
+    width: '244px',
+    height: '216px',
+    borderRadius: '28px'
+  } : {};
+  
   return (
     <div 
-      className={`rounded-[28px] h-[390px] cursor-pointer transition-transform duration-300 ease-in-out hover:scale-102 relative overflow-hidden ${className}`}
-      style={{
-        background: 'black',
-        position: 'relative',
-        zIndex: 0
-      }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      className={`
+        relative overflow-hidden rounded-[28px]
+        ${isTabletBottomCard ? '' : 'h-[285px] w-[400px]'}
+        cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.02] 
+        flex flex-col
+        ${isTabletBottomCard ? '' : 'm-[6px]'}
+        bg-black
+        ${className}
+      `}
+      style={tabletCardStyle}
     >
+      {/* Background Video */}
       <video
-        ref={videoRef}
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        autoPlay
+        loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{
-          borderRadius: '28px',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%'
-        }}
+        style={{ zIndex: 1 }}
       >
-        <source
-          src="/Assets/ImpactSections/Video_highlight/In_a_dark_202505221920.mp4"
-          type="video/mp4"
-        />
+        <source src="/Assets/ImpactSections/Video_highlight/In_a_dark_202505221920.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
-      
+
       {/* Gradient Overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full"
         style={{
-          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 46, 122, 0.8) 100%)',
-          borderRadius: '28px',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 999
+          zIndex: 2,
+          background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 46, 122, 0.60) 100%)',
+          pointerEvents: 'none'
         }}
       />
     </div>
   );
-}
-
-export default LogoCard; 
+} 

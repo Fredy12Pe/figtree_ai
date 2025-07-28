@@ -2,88 +2,116 @@
 
 import React from 'react';
 import { motion, useTransform, MotionValue } from 'framer-motion';
-import styles from '../Breakdown.module.css';
+
+interface Step {
+  number: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  additionalText: string;
+  bgColor: string;
+}
 
 interface BreakdownCardProps {
-  CardComponent: React.ComponentType<{ animationProgress: MotionValue<number>; imageAnimationProgress: MotionValue<number> }>;
-  scrollYProgress: MotionValue<number>;
+  step: Step;
+  activeCardIndex: MotionValue<number>;
   index: number;
 }
 
-const BreakdownCard = ({ CardComponent, scrollYProgress, index }: BreakdownCardProps) => {
-  // Cards complete by 75% of scroll, leaving 25% for pause
-  const cardProgress = useTransform(scrollYProgress, 
-    [index * 0.25, (index + 1) * 0.25], 
+const BreakdownCard = ({ step, activeCardIndex, index }: BreakdownCardProps) => {
+  const distance = useTransform(activeCardIndex, (latest) => index - latest);
+
+  const y = useTransform(
+    distance,
+    [-1, 0, 1, 2, 3],
+    [-50, 0, 20, 40, 60]
+  );
+
+  const scale = useTransform(
+    distance,
+    [-1, 0, 1, 2, 3],
+    [0.8, 1, 0.9, 0.8, 0.7]
+  );
+
+  const opacity = useTransform(
+    distance,
+    [-1, 0],
     [0, 1]
   );
 
-  // Image animation timing based on card position
-  let imageProgress;
-  if (index === 0) {
-    // First card: Only animate when coming back from second card (scrolling up)
-    imageProgress = useTransform(scrollYProgress,
-      [0.15, 0.25], // Only in the transition zone from card 2 back to card 1
-      [0, 1]        // Animate in when scrolling up
-    );
-  } else {
-    // Other cards: Image animates when previous card is 90% faded
-    imageProgress = useTransform(scrollYProgress,
-      [Math.max(0, (index - 0.1) * 0.25), (index + 1) * 0.25],
-      [0, 1]
-    );
-  }
-
-  // Last card should stay visible during the pause period (75%-100% of total scroll)
-  if (index === 2) {
-    // Card 3: Stay fully visible throughout its entire progress + pause
-    const y = 0;
-    const scale = 1;
-    const opacity = useTransform(scrollYProgress, [0.75, 0.95, 1], [1, 1, 0]);
-    
-    return (
-      <motion.div
-        key={index}
-        className={styles.card}
-        style={{ 
-          y, 
-          scale, 
-          opacity,
-          zIndex: 3 - index 
-        }}
-      >
-        <CardComponent 
-          animationProgress={cardProgress} 
-          imageAnimationProgress={imageProgress}
-        />
-      </motion.div>
-    );
-  }
-  
-  // Cards 1 & 2: Normal timing
-  const pausePoint = 0.7;
-  const fadeStart = 0.85;
-  
-  const y = useTransform(cardProgress, [0, pausePoint, 1], [0, 0, -200]);
-  const scale = useTransform(cardProgress, [0, pausePoint, 1], [1, 1, 0.8]);
-  const opacity = useTransform(cardProgress, [0, pausePoint, fadeStart, 1], [1, 1, 0.5, 0]);
+  const numberColor = step.bgColor === "#E5CEB9" ? "#D9C1AB" : 
+                      step.bgColor === "#EF7822" ? "#DE7223" : "#36363E";
 
   return (
     <motion.div
-      key={index}
-      className={styles.card}
+      className="absolute w-[400px] h-[600px] rounded-[28px] overflow-hidden text-white"
       style={{ 
-        y, 
-        scale, 
+        y,
+        scale,
         opacity,
-        zIndex: 3 - index 
+        zIndex: 3 - index,
+        backgroundColor: step.bgColor,
       }}
     >
-      <CardComponent 
-        animationProgress={cardProgress} 
-        imageAnimationProgress={imageProgress}
-      />
+      {/* Background Number */}
+      <div 
+        className="absolute z-0 opacity-30 leading-none"
+        style={{
+          fontSize: '260px',
+          color: numberColor,
+          right: '-16px',
+          bottom: '-30px',
+          fontFamily: 'Inter',
+          fontWeight: 600,
+          wordWrap: 'break-word',
+      }}
+    >
+        {step.number}
+      </div>
+
+      {/* Card Content */}
+      <div className="relative z-10 h-full flex flex-col">
+        <div className="flex-1 p-8 flex flex-col justify-start">
+          <div style={{ width: '290px', height: '265px', marginLeft: '36px', marginTop: '36px' }}>
+            <h3 
+              className="" 
+              style={{ fontFamily: 'Inter', fontWeight: 600, fontSize: '26px', color: 'white' }}
+            >
+              {step.title}
+            </h3>
+            <div style={{ height: '14px' }} />
+            <p 
+              className="" 
+              style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '18px', color: 'rgba(255, 255, 255, 0.60)' }}
+            >
+              {step.subtitle}
+            </p>
+            <div style={{ height: '14px' }} />
+            <p 
+              className="leading-relaxed" 
+              style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '16px', color: 'white' }}
+            >
+              {step.description}
+            </p>
+            <div style={{ height: '16px' }} />
+            <p 
+              className="leading-relaxed" 
+              style={{ fontFamily: 'Inter', fontWeight: 400, fontSize: '16px', color: 'white' }}
+            >
+              {step.additionalText}
+            </p>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 };
 
 export default BreakdownCard; 
+
+
+
+
+
+
+

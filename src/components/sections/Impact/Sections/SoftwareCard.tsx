@@ -1,210 +1,166 @@
 "use client";
+import React from 'react';
 import Image from 'next/image';
-import ImpactCard from '../ImpactCard';
- 
+
 export default function SoftwareCard({ className = '' }) {
+  console.log('NEW SoftwareCard with 90px logos loading!');
+  
+  // Determine tablet sizing based on className
+  const isTabletBottomCard = className.includes('tablet-bottom-card');
+  
+  // Define tablet-specific styles
+  const tabletCardStyle = isTabletBottomCard ? {
+    width: '243px',
+    height: '216px',
+    padding: '20px',
+    borderRadius: '28px'
+  } : {};
+  
   return (
     <div 
-      className={`rounded-[28px] h-[390px] cursor-pointer transition-transform duration-300 ease-in-out hover:scale-102 flex flex-col overflow-hidden ${className}`}
+      className={`
+        relative overflow-hidden rounded-[28px]
+        ${isTabletBottomCard ? '' : 'h-[311px] w-[400px] p-[36px]'}
+        cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.02] 
+        flex flex-col
+        ${isTabletBottomCard ? '' : 'm-[6px]'}
+        ${className}
+      `}
       style={{
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 46, 122, 0.60) 100%), black',
-        padding: '44px 40px 28px 40px'
+        ...tabletCardStyle
       }}
     >
+      <style jsx>{`
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+        .bounce-animation {
+          animation: bounce 2s ease-in-out infinite;
+        }
+      `}</style>
+
       {/* Heading Section */}
-      <div style={{ marginBottom: '51px' }}>
-        <p style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 500,
-          fontSize: '16px',
-          color: '#ffffff',
-          marginBottom: '8px',
-          margin: '0 0 8px 0'
-        }}>
-          Seamless Integration
-        </p>
-        <h3 style={{
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 500,
-          fontSize: '34px',
-          color: '#ffffff',
-          margin: 0,
-          lineHeight: 1.2
-        }}>
-          Connect with your<br />
-          favorite tools
+      <div className={isTabletBottomCard ? '' : 'mb-[40px]'} style={isTabletBottomCard ? {marginBottom: '16px'} : {}}>
+        <h3 
+          className="font-inter font-medium"
+          style={{ 
+            color: '#ffffff', 
+            lineHeight: '1.4',
+            fontSize: isTabletBottomCard ? '16px' : '26px'
+          }}
+        >
+          Connect with<br />
+          currently used<br />
+          software
         </h3>
       </div>
 
-      {/* Software Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, max-content)',
-        gap: '10px',
-        justifyContent: 'start'
-      }}>
+      {/* Software Icons - Responsive sizing */}
+      <div className="flex justify-start" style={{gap: isTabletBottomCard ? '8px' : '16px'}}>
         {/* Gmail */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          transition: 'transform 0.3s ease',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
+          style={{ 
+            width: isTabletBottomCard ? '45px' : '90px', 
+            height: isTabletBottomCard ? '45px' : '90px',
+            minWidth: isTabletBottomCard ? '45px' : '90px',
+            minHeight: isTabletBottomCard ? '45px' : '90px',
+            animationDelay: '0s',
+            borderRadius: isTabletBottomCard ? '12px' : '20px'
+          }}
         >
-          <div style={{
-            backgroundColor: '#0A1628',
-            borderRadius: '16px',
-            width: '112px',
-            height: '112px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '12px'
-          }}>
-            <Image
-              src="/Assets/ImpactSections/Software_connections/Gmail.png"
-              alt="Gmail"
-              width={112}
-              height={112}
-              style={{ opacity: 1 }}
-            />
-          </div>
-          <p style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '12px',
-            color: '#ffffff',
-            textAlign: 'center',
-            margin: 0
-          }}>
-            Gmail
-          </p>
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Gmail.png"
+            alt="Gmail"
+            width={isTabletBottomCard ? 45 : 90}
+            height={isTabletBottomCard ? 45 : 90}
+            className="object-contain"
+            style={{ 
+              width: isTabletBottomCard ? '45px' : '90px', 
+              height: isTabletBottomCard ? '45px' : '90px' 
+            }}
+          />
         </div>
 
         {/* Notion */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          transition: 'transform 0.3s ease',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
+          style={{ 
+            width: isTabletBottomCard ? '45px' : '90px', 
+            height: isTabletBottomCard ? '45px' : '90px',
+            minWidth: isTabletBottomCard ? '45px' : '90px',
+            minHeight: isTabletBottomCard ? '45px' : '90px',
+            animationDelay: '0.5s',
+            borderRadius: isTabletBottomCard ? '12px' : '20px'
+          }}
         >
-          <div style={{
-            backgroundColor: '#0A1628',
-            borderRadius: '16px',
-            width: '112px',
-            height: '112px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '12px'
-          }}>
-            <Image
-              src="/Assets/ImpactSections/Software_connections/Notion.png"
-              alt="Notion"
-              width={112}
-              height={112}
-              style={{ opacity: 1 }}
-            />
-          </div>
-          <p style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '12px',
-            color: '#ffffff',
-            textAlign: 'center',
-            margin: 0
-          }}>
-            Notion
-          </p>
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Notion.png"
+            alt="Notion"
+            width={isTabletBottomCard ? 45 : 90}
+            height={isTabletBottomCard ? 45 : 90}
+            className="object-contain"
+            style={{ 
+              width: isTabletBottomCard ? '45px' : '90px', 
+              height: isTabletBottomCard ? '45px' : '90px' 
+            }}
+          />
         </div>
 
-        {/* Salesforce */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          transition: 'transform 0.3s ease',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        {/* SalesForce */}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
+          style={{ 
+            width: isTabletBottomCard ? '45px' : '90px', 
+            height: isTabletBottomCard ? '45px' : '90px',
+            minWidth: isTabletBottomCard ? '45px' : '90px',
+            minHeight: isTabletBottomCard ? '45px' : '90px',
+            animationDelay: '1s',
+            borderRadius: isTabletBottomCard ? '12px' : '20px'
+          }}
         >
-          <div style={{
-            backgroundColor: '#0A1628',
-            borderRadius: '16px',
-            width: '112px',
-            height: '112px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '12px'
-          }}>
-            <Image
-              src="/Assets/ImpactSections/Software_connections/SalesForce.png"
-              alt="Salesforce"
-              width={112}
-              height={112}
-              style={{ opacity: 1 }}
-            />
-          </div>
-          <p style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '12px',
-            color: '#ffffff',
-            textAlign: 'center',
-            margin: 0
-          }}>
-            Salesforce
-          </p>
+          <Image
+            src="/Assets/ImpactSections/Software_connections/SalesForce.png"
+            alt="SalesForce"
+            width={isTabletBottomCard ? 45 : 90}
+            height={isTabletBottomCard ? 45 : 90}
+            className="object-contain"
+            style={{ 
+              width: isTabletBottomCard ? '45px' : '90px', 
+              height: isTabletBottomCard ? '45px' : '90px' 
+            }}
+          />
         </div>
 
         {/* Zapier */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          transition: 'transform 0.3s ease',
-          cursor: 'pointer'
-        }}
-        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
-        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        <div 
+          className="bg-[#FF4A00] rounded-[20px] flex items-center justify-center bounce-animation"
+          style={{ 
+            width: isTabletBottomCard ? '45px' : '90px', 
+            height: isTabletBottomCard ? '45px' : '90px',
+            minWidth: isTabletBottomCard ? '45px' : '90px',
+            minHeight: isTabletBottomCard ? '45px' : '90px',
+            animationDelay: '1.5s',
+            borderRadius: isTabletBottomCard ? '12px' : '20px'
+          }}
         >
-          <div style={{
-            backgroundColor: '#0A1628',
-            borderRadius: '16px',
-            width: '112px',
-            height: '112px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '12px'
-          }}>
-            <Image
-              src="/Assets/ImpactSections/Software_connections/Zapier.png"
-              alt="Zapier"
-              width={112}
-              height={112}
-              style={{ opacity: 1 }}
-            />
-          </div>
-          <p style={{
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            fontSize: '12px',
-            color: '#ffffff',
-            textAlign: 'center',
-            margin: 0
-          }}>
-            Zapier
-          </p>
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Zapier.png"
+            alt="Zapier"
+            width={isTabletBottomCard ? 45 : 90}
+            height={isTabletBottomCard ? 45 : 90}
+            className="object-contain"
+            style={{ 
+              width: isTabletBottomCard ? '45px' : '90px', 
+              height: isTabletBottomCard ? '45px' : '90px' 
+            }}
+          />
         </div>
       </div>
     </div>

@@ -11,18 +11,3 @@ html, body, #__next, #root {
 body {
   background-color: white;
 }
-
-/* Removed !important to allow Tailwind to control color */
-/*
-input, textarea {
-  color: white !important;
-}
-
-input::placeholder, textarea::placeholder {
-  color: rgba(255, 255, 255, 0.5) !important;
-}
-
-label {
-  color: white !important;
-}
-*/

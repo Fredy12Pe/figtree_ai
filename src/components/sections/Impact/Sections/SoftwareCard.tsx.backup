@@ -1,0 +1,95 @@
+"use client";
+import React from 'react';
+import Image from 'next/image';
+
+export default function SoftwareCard({ className = '' }) {
+  console.log('SoftwareCard rendering with 90px logos');
+  
+  return (
+    <div 
+      className={`
+        relative overflow-hidden rounded-[28px]
+        h-[311px] w-[400px]
+        p-[36px]
+        cursor-pointer transition-transform duration-300 ease-in-out hover:scale-[1.02] 
+        flex flex-col
+        m-[6px]
+        ${className}
+      `}
+      style={{
+        background: 'red' // Temporary bright red to force visibility
+      }}
+    >
+      {/* Heading Section */}
+      <div className="mb-[40px]">
+        <h3 
+          className="font-inter font-medium text-[26px]"
+          style={{ color: '#ffffff', lineHeight: '1.4' }}
+        >
+          Connect with<br />
+          currently used<br />
+          software
+        </h3>
+      </div>
+
+      {/* Software Icons */}
+      <div className="flex gap-[16px] justify-start">
+        {/* Gmail */}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center"
+          style={{ width: '90px', height: '90px' }}
+        >
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Gmail.png"
+            alt="Gmail"
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] object-contain"
+          />
+        </div>
+
+        {/* Notion */}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center"
+          style={{ width: '90px', height: '90px' }}
+        >
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Notion.png"
+            alt="Notion"
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] object-contain"
+          />
+        </div>
+
+        {/* SalesForce */}
+        <div 
+          className="bg-white rounded-[20px] flex items-center justify-center"
+          style={{ width: '90px', height: '90px' }}
+        >
+          <Image
+            src="/Assets/ImpactSections/Software_connections/SalesForce.png"
+            alt="SalesForce"
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] object-contain"
+          />
+        </div>
+
+        {/* Zapier */}
+        <div 
+          className="bg-[#FF4A00] rounded-[20px] flex items-center justify-center"
+          style={{ width: '90px', height: '90px' }}
+        >
+          <Image
+            src="/Assets/ImpactSections/Software_connections/Zapier.png"
+            alt="Zapier"
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  );
+} 
