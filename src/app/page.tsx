@@ -35,11 +35,11 @@ export default function Home() {
             style={{
               width: '100%',
               backgroundColor: 'black',
-              padding: '2rem 1rem',
+              padding: '12rem 1rem',
               paddingBottom: '8rem',
             }}
           >
-            <div style={{ height: '482px' }}>
+            <div style={{ height: '560px' }}>
               <WhyAi />
             </div>
           </div>

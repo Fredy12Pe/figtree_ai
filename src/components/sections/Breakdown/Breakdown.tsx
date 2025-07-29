@@ -74,7 +74,7 @@ const TabletBreakdownCard = ({ step, activeCardIndex, index }: {
             >
               {step.title}
             </h3>
-            <div style={{ height: '6px' }} />
+            <div style={{ height: '8px' }} />
             <p 
               style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '18px', color: 'rgba(255, 255, 255, 0.60)' }}
             >
@@ -94,6 +94,183 @@ const TabletBreakdownCard = ({ step, activeCardIndex, index }: {
             >
               {step.additionalText}
             </p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Desktop-specific card component
+const DesktopBreakdownCard = ({ step, activeCardIndex, index }: { 
+  step: any, 
+  activeCardIndex: MotionValue<number>, 
+  index: number 
+}) => {
+  const distance = useTransform(activeCardIndex, (latest: number) => index - latest);
+
+  const y = useTransform(
+    distance,
+    [-1, 0, 1, 2, 3],
+    [-80, 0, 40, 80, 120]
+  );
+
+  const scale = useTransform(
+    distance,
+    [-1, 0, 1, 2, 3],
+    [0.7, 1, 0.85, 0.7, 0.55]
+  );
+
+  const opacity = useTransform(
+    distance,
+    [-1, 0],
+    [0, 1]
+  );
+
+  // Image slide animation - slides in from right when card becomes active
+  const imageX = useTransform(
+    distance,
+    [-1, 0, 1],
+    [300, 0, -75] // Start 300px to the right, slide to 0, then slide out to -75px
+  );
+
+  const imageOpacity = useTransform(
+    distance,
+    [-1, 0, 1],
+    [0, 1, 0] // Fade in when active, completely fade out when inactive
+  );
+
+  const numberColor = step.bgColor === "#E5CEB9" ? "#D9C1AB" : 
+                      step.bgColor === "#EF7822" ? "#DE7223" : "#36363E";
+
+  return (
+    <motion.div
+      className="absolute rounded-[40px] overflow-hidden text-white"
+      style={{ 
+        y,
+        scale,
+        opacity,
+        zIndex: 3 - index,
+        backgroundColor: step.bgColor,
+        width: '1440px',
+        height: '636px'
+      }}
+    >
+      {/* Background Number */}
+      <div 
+        className="absolute z-0 opacity-50 leading-none"
+        style={{
+          fontSize: '360px',
+          color: numberColor,
+          right: '60px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          fontFamily: 'Inter',
+          fontWeight: 600,
+          wordWrap: 'break-word',
+        }}
+      >
+        {step.number}
+      </div>
+
+      {/* Discovery Call Image - Only for step 01 */}
+      {step.number === "01" && (
+        <motion.div 
+          className="absolute z-5"
+          style={{
+            right: '236px',
+            top: '0',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            x: imageX,
+            opacity: imageOpacity
+          }}
+        >
+          <img
+            src="/Assets/Breakdown/Discovery_call.png"
+            alt="Discovery Call"
+            style={{
+              height: '100%',
+              width: 'auto',
+              objectFit: 'cover'
+            }}
+          />
+        </motion.div>
+      )}
+
+      {/* Custom Automation Image - Only for step 02 */}
+      {step.number === "02" && (
+        <motion.div 
+          className="absolute z-5"
+          style={{
+            right: '136px',
+            top: '0',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            x: imageX,
+            opacity: imageOpacity
+          }}
+        >
+          <img
+            src="/Assets/Breakdown/Automation.png"
+            alt="Custom Automation"
+            style={{
+              height: '100%',
+              width: 'auto',
+              objectFit: 'cover'
+            }}
+          />
+        </motion.div>
+      )}
+
+      {/* Go Live & Support Image - Only for step 03 */}
+      {step.number === "03" && (
+        <motion.div 
+          className="absolute z-5"
+          style={{
+            right: '360px',
+            top: '0',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            x: imageX,
+            opacity: imageOpacity
+          }}
+        >
+          <img
+            src="/Assets/Breakdown/Go_live.png"
+            alt="Go Live & Support"
+            style={{
+              height: '100%',
+              width: 'auto',
+              objectFit: 'cover'
+            }}
+          />
+        </motion.div>
+      )}
+
+      {/* Card Content - desktop specific layout */}
+      <div className="relative z-10 h-full flex flex-col">
+        <div className="flex-1 p-12 flex flex-col justify-start">
+          <div style={{ width: '521px', marginLeft: '80px', height: '100%', display: 'flex', alignItems: 'center' }}>
+            <div style={{ width: '100%', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 34, display: 'inline-flex' }}>
+              <div style={{ width: 408, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 12, display: 'flex' }}>
+                <div style={{ alignSelf: 'stretch', color: 'white', fontSize: 60, fontFamily: 'Inter', fontWeight: '600', wordWrap: 'break-word' }}>
+                  {step.title.split(' ').slice(0, 2).join(' ')}<br/>{step.title.split(' ').slice(2).join(' ')}
+                </div>
+                <div style={{ width: 338, color: 'white', fontSize: 24, fontFamily: 'Inter', fontWeight: '500', wordWrap: 'break-word' }}>
+                  {step.subtitle}
+                </div>
+              </div>
+              <div style={{ alignSelf: 'stretch', justifyContent: 'center', display: 'flex', flexDirection: 'column', color: 'white', fontSize: 18, fontFamily: 'Inter', fontWeight: '400', wordWrap: 'break-word' }}>
+                {step.description}<br/><br/>{step.additionalText}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -132,6 +309,7 @@ const Breakdown = ({ className = '' }) => {
   const containerRef = useRef(null);
   const containerRef2 = useRef(null);
   const tabletContainerRef = useRef(null);
+  const desktopContainerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -145,6 +323,11 @@ const Breakdown = ({ className = '' }) => {
 
   const { scrollYProgress: tabletScrollYProgress } = useScroll({
     target: tabletContainerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const { scrollYProgress: desktopScrollYProgress } = useScroll({
+    target: desktopContainerRef,
     offset: ["start start", "end end"],
   });
 
@@ -164,6 +347,12 @@ const Breakdown = ({ className = '' }) => {
     tabletScrollYProgress,
     [0, 0.15, 0.25, 0.45, 0.55, 0.75, 0.85, 1],
     [0, 0, 0, 1, 1, 1, 2, 2]
+  );
+
+  const desktopActiveCardIndex = useTransform(
+    desktopScrollYProgress,
+    [0, 0.1, 0.2, 0.35, 0.45, 0.6, 0.7, 0.85, 1],
+    [0, 0, 0, 1, 1, 1, 2, 2, 2]
   );
 
   return (
@@ -224,7 +413,7 @@ const Breakdown = ({ className = '' }) => {
               {/* Title */}
               <div className="w-full px-4 sm:px-8 md:px-20 lg:px-[240px] z-20">
                 <h2 
-                  className="text-black m-0 leading-tight text-center" 
+                  className="text-black m-0 leading-tight text-left" 
                   style={{ 
                     fontSize: '28px',
                     fontFamily: 'Inter',
@@ -253,7 +442,7 @@ const Breakdown = ({ className = '' }) => {
             
             {/* Scroll Indicator */}
             <motion.div
-              className="text-black opacity-10 flex flex-col items-center pb-[32px]"
+              className="text-black flex flex-col items-center pb-[32px]"
               animate={{ y: [0, 8, 0] }}
               transition={{
                 duration: 1.5,
@@ -285,19 +474,7 @@ const Breakdown = ({ className = '' }) => {
       {/* Tablet Layout */}
       <div ref={tabletContainerRef} className={`tablet-breakdown ${styles.container}`}>
         
-        {/* Debug indicator */}
-        <div style={{
-          position: 'fixed',
-          top: '10px',
-          right: '10px',
-          background: 'blue',
-          color: 'white',
-          padding: '5px',
-          zIndex: 1000,
-          fontSize: '12px'
-        }}>
-          TABLET BREAKDOWN ACTIVE
-        </div>
+
         
         <div className={styles.stickyArea}>
           <div 
@@ -311,7 +488,7 @@ const Breakdown = ({ className = '' }) => {
               {/* Title */}
               <div className="w-full px-4 sm:px-8 md:px-20 lg:px-[240px] z-20">
                 <h2 
-                  className="text-black m-0 leading-tight text-center" 
+                  className="text-black m-0 leading-tight text-left" 
                   style={{ 
                     fontSize: '38px',
                     fontFamily: 'Inter',
@@ -343,7 +520,7 @@ const Breakdown = ({ className = '' }) => {
             
             {/* Scroll Indicator */}
             <motion.div
-              className="text-black opacity-10 flex flex-col items-center pb-[32px]"
+              className="text-black flex flex-col items-center pb-[32px]"
               animate={{ y: [0, 8, 0] }}
               transition={{
                 duration: 1.5,
@@ -374,7 +551,7 @@ const Breakdown = ({ className = '' }) => {
       </div>
 
       {/* Desktop Layout */}
-      <div ref={containerRef2} className={`desktop-breakdown ${styles.container} ${className}`}>
+      <div ref={desktopContainerRef} className={`desktop-breakdown ${styles.container} ${className}`}>
         <div className={styles.stickyArea}>
           <div 
             className={styles.backgroundImage}
@@ -383,15 +560,15 @@ const Breakdown = ({ className = '' }) => {
           
           <div className="h-full w-full flex flex-col justify-between items-center">
             {/* Main Content Block */}
-            <div className="flex flex-col items-center pt-[60px]">
+            <div className="flex flex-col items-center pt-[120px]">
               {/* Title */}
               <div className="w-full px-4 sm:px-8 md:px-20 lg:px-[240px] z-20">
                 <h2 
-                  className="text-black m-0 leading-tight text-center" 
+                  className="text-black m-0 leading-tight text-left" 
                   style={{ 
-                    fontSize: '28px',
+                    fontSize: '48px',
                     fontFamily: 'Inter',
-                    fontWeight: 500,
+                    fontWeight: 600,
                   }}
                 >
                   How it works
@@ -399,16 +576,19 @@ const Breakdown = ({ className = '' }) => {
               </div>
 
               {/* Spacer */}
-              <div style={{ height: '28px' }} />
+              <div style={{ height: '40px' }} />
 
-              {/* Cards Container */}
-              <div className="relative w-[400px] h-[600px] pointer-events-none mx-auto">
+              {/* Cards Container - Desktop Specific Size */}
+              <div className="relative pointer-events-none mx-auto" style={{
+                width: '1440px',
+                height: '636px'
+              }}>
                 {steps.map((step, index) => (
-                  <BreakdownCard
+                  <DesktopBreakdownCard
                     key={index}
                     step={step}
                     index={index}
-                    activeCardIndex={activeCardIndex2}
+                    activeCardIndex={desktopActiveCardIndex}
                   />
                 ))}
               </div>
@@ -416,7 +596,7 @@ const Breakdown = ({ className = '' }) => {
             
             {/* Scroll Indicator */}
             <motion.div
-              className="text-black opacity-10 flex flex-col items-center pb-[32px]"
+              className="text-black flex flex-col items-center pb-[40px]"
               animate={{ y: [0, 8, 0] }}
               transition={{
                 duration: 1.5,
@@ -425,14 +605,14 @@ const Breakdown = ({ className = '' }) => {
                 ease: "easeInOut",
               }}
             >
-              <span className="font-medium">Scroll</span>
+              <span className="font-medium text-lg">Scroll</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2}
                 stroke="currentColor"
-                className="w-6 h-6 mt-1"
+                className="w-8 h-8 mt-2"
               >
                 <path
                   strokeLinecap="round"

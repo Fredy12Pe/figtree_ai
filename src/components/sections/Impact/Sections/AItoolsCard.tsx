@@ -1,20 +1,29 @@
 import Image from 'next/image';
 
 export default function AItoolsCard({ className = '' }) {
-  // Determine tablet sizing based on className
+  // Determine sizing based on className
   const isTabletLeftCard = className.includes('tablet-left-card');
+  const isDesktopTopLeftCard = className.includes('desktop-top-left-card');
   
   // Define base styles
   const baseCardStyle = {
     background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 46, 122, 0.60) 100%), black'
   };
   
-  // Define tablet-specific styles
-  const tabletCardStyle = isTabletLeftCard ? {
+  // Define responsive styles
+  const responsiveCardStyle = isTabletLeftCard ? {
     width: '434px',
     height: '216px',
     padding: '24px',
     borderRadius: '28px'
+  } : isDesktopTopLeftCard ? {
+    width: '831px',
+    height: '389px',
+    padding: '36px',
+    borderRadius: '28px',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'space-between'
   } : {};
   
   return (
@@ -31,7 +40,7 @@ export default function AItoolsCard({ className = '' }) {
     `}
     style={{
         ...baseCardStyle,
-        ...tabletCardStyle
+        ...responsiveCardStyle
       }}
     >
       
@@ -41,17 +50,17 @@ export default function AItoolsCard({ className = '' }) {
           className={`font-inter font-medium ${isTabletLeftCard ? '' : 'text-[13px] lg:text-[15px]'} mb-[8px]`}
           style={{ 
             color: '#ffffff',
-            fontSize: isTabletLeftCard ? '11px' : undefined
+            fontSize: isTabletLeftCard ? '11px' : isDesktopTopLeftCard ? '16px' : undefined
           }}
         >
           Powered by Smart Automation
         </p>
         <h3 
-          className={`font-inter font-medium ${isTabletLeftCard ? '' : 'text-[26px] lg:text-[34px]'}`}
+          className={`font-inter font-medium ${isTabletLeftCard ? '' : 'text-[26px] lg:text-[36px]'}`}
           style={{ 
             color: '#ffffff', 
             lineHeight: '1.4',
-            fontSize: isTabletLeftCard ? '22px' : undefined
+            fontSize: isTabletLeftCard ? '20px' : isDesktopTopLeftCard ? '36px' : undefined
           }}
         >
           Using the latest<br />
@@ -59,120 +68,204 @@ export default function AItoolsCard({ className = '' }) {
         </h3>
       </div>
 
-      {/* Tools Grid */}
-      <div className="flex flex-col" style={{gap: isTabletLeftCard ? '16px' : '24px'}}>
+      {/* Tools Grid - Using explicit margins */}
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* Spacer to push logos down */}
+        <div style={{ flex: 1 }}></div>
         {/* Top Row - 3 Tools */}
-        <div className="flex" style={{gap: isTabletLeftCard ? '16px' : '20px'}}>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
           {/* ChatGPT */}
-          <div className="flex flex-col items-center transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-2">
-            <div 
-              className="bg-[#0A1628] rounded-[20px] flex items-center justify-center"
-              style={{
-                width: isTabletLeftCard ? '60px' : '72px',
-                height: isTabletLeftCard ? '60px' : '72px',
-                marginBottom: isTabletLeftCard ? '6px' : '8px'
-              }}
-            >
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            cursor: 'pointer', 
+            transition: 'transform 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            <div style={{ 
+              width: isTabletLeftCard ? '60px' : '60px', 
+              height: isTabletLeftCard ? '60px' : '60px', 
+              backgroundColor: '#0A1628', 
+              borderRadius: '20px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginBottom: '8px' 
+            }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/ChatGpt.png"
                 alt="ChatGPT"
-                width={isTabletLeftCard ? 60 : 72}
-                height={isTabletLeftCard ? 60 : 72}
+                width={isTabletLeftCard ? 60 : 60}
+                height={isTabletLeftCard ? 60 : 60}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '72px',
-                  height: isTabletLeftCard ? '60px' : '72px'
+                  width: isTabletLeftCard ? '60px' : '60px',
+                  height: isTabletLeftCard ? '60px' : '60px'
                 }}
               />
             </div>
-            <span 
-              className="font-inter font-medium text-center"
-              style={{ 
-                color: 'rgba(255, 255, 255, 0.14)',
-                fontSize: isTabletLeftCard ? '9px' : '10px'
-              }}
-            >
+            <span style={{ 
+              color: 'rgba(255, 255, 255, 0.14)', 
+              fontSize: isTabletLeftCard ? '9px' : '12px', 
+              fontFamily: 'Inter', 
+              fontWeight: '500' 
+            }}>
               Chat GPT
             </span>
           </div>
 
           {/* Lindy AI */}
-          <div className="flex flex-col items-center transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-2">
-            <div 
-              className="bg-[#0A1628] rounded-[20px] flex items-center justify-center"
-              style={{
-                width: isTabletLeftCard ? '60px' : '72px',
-                height: isTabletLeftCard ? '60px' : '72px',
-                marginBottom: isTabletLeftCard ? '6px' : '8px'
-              }}
-            >
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            cursor: 'pointer', 
+            transition: 'transform 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            <div style={{ 
+              width: isTabletLeftCard ? '60px' : '60px', 
+              height: isTabletLeftCard ? '60px' : '60px', 
+              backgroundColor: '#0A1628', 
+              borderRadius: '20px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginBottom: '8px' 
+            }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/LindyAi.png"
                 alt="Lindy AI"
-                width={isTabletLeftCard ? 60 : 72}
-                height={isTabletLeftCard ? 60 : 72}
+                width={isTabletLeftCard ? 60 : 60}
+                height={isTabletLeftCard ? 60 : 60}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '72px',
-                  height: isTabletLeftCard ? '60px' : '72px'
+                  width: isTabletLeftCard ? '60px' : '60px',
+                  height: isTabletLeftCard ? '60px' : '60px'
                 }}
               />
             </div>
-            <span 
-              className="font-inter font-medium text-center"
-              style={{ 
-                color: 'rgba(255, 255, 255, 0.14)',
-                fontSize: isTabletLeftCard ? '9px' : '10px'
-              }}
-            >
+            <span style={{ 
+              color: 'rgba(255, 255, 255, 0.14)', 
+              fontSize: isTabletLeftCard ? '9px' : '12px', 
+              fontFamily: 'Inter', 
+              fontWeight: '500' 
+            }}>
               Lindy AI
             </span>
           </div>
 
           {/* Zapier */}
-          <div className="flex flex-col items-center transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-2">
-            <div 
-              className="bg-[#0A1628] rounded-[20px] flex items-center justify-center"
-              style={{
-                width: isTabletLeftCard ? '60px' : '72px',
-                height: isTabletLeftCard ? '60px' : '72px',
-                marginBottom: isTabletLeftCard ? '6px' : '8px'
-              }}
-            >
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            cursor: 'pointer', 
+            transition: 'transform 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            <div style={{ 
+              width: isTabletLeftCard ? '60px' : '60px', 
+              height: isTabletLeftCard ? '60px' : '60px', 
+              backgroundColor: '#0A1628', 
+              borderRadius: '20px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              marginBottom: '8px' 
+            }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/Zapier.png"
                 alt="Zapier"
-                width={isTabletLeftCard ? 60 : 72}
-                height={isTabletLeftCard ? 60 : 72}
+                width={isTabletLeftCard ? 60 : 60}
+                height={isTabletLeftCard ? 60 : 60}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '72px',
-                  height: isTabletLeftCard ? '60px' : '72px'
+                  width: isTabletLeftCard ? '60px' : '60px',
+                  height: isTabletLeftCard ? '60px' : '60px'
                 }}
               />
             </div>
-            <span 
-              className="font-inter font-medium text-center"
-              style={{ 
-                color: 'rgba(255, 255, 255, 0.14)',
-                fontSize: isTabletLeftCard ? '9px' : '10px'
-              }}
-            >
+            <span style={{ 
+              color: 'rgba(255, 255, 255, 0.14)', 
+              fontSize: isTabletLeftCard ? '9px' : '12px', 
+              fontFamily: 'Inter', 
+              fontWeight: '500' 
+            }}>
               Zapier
             </span>
           </div>
           
-          {/* Google Gemini - Now in top row for tablet */}
-          {isTabletLeftCard && (
-            <div className="flex flex-col items-center transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-2">
-              <div 
-                className="bg-[#0A1628] rounded-[20px] flex items-center justify-center"
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  marginBottom: '6px'
-                }}
-              >
+          {/* Google Gemini - Top row for tablet and desktop */}
+          {(isTabletLeftCard || isDesktopTopLeftCard) && (
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              cursor: 'pointer', 
+              transition: 'transform 0.3s ease-in-out',
+              marginRight: isTabletLeftCard ? '16px' : '46px'
+            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              <div style={{ 
+                width: isTabletLeftCard ? '60px' : '112px', 
+                height: isTabletLeftCard ? '60px' : '112px', 
+                backgroundColor: '#0A1628', 
+                borderRadius: '20px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                marginBottom: '8px' 
+              }}>
+                <Image
+                  src="/Assets/ImpactSections/Ai_tools/Gemini.png"
+                  alt="Google Gemini"
+                  width={isTabletLeftCard ? 60 : 112}
+                  height={isTabletLeftCard ? 60 : 112}
+                  className="opacity-70"
+                  style={{
+                    width: isTabletLeftCard ? '60px' : '112px',
+                    height: isTabletLeftCard ? '60px' : '112px'
+                  }}
+                />
+              </div>
+              <span style={{ 
+                color: 'rgba(255, 255, 255, 0.14)', 
+                fontSize: isTabletLeftCard ? '9px' : '12px', 
+                fontFamily: 'Inter', 
+                fontWeight: '500' 
+              }}>
+                Google Gemini
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Row - 1 Tool Left Aligned (only for mobile) */}
+        {!isTabletLeftCard && !isDesktopTopLeftCard && (
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'row',
+            marginTop: '24px'
+          }}>
+            {/* Google Gemini */}
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              cursor: 'pointer', 
+              transition: 'transform 0.3s ease-in-out' 
+            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              <div style={{ 
+                width: '60px', 
+                height: '60px', 
+                backgroundColor: '#0A1628', 
+                borderRadius: '20px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                marginBottom: '8px' 
+              }}>
                 <Image
                   src="/Assets/ImpactSections/Ai_tools/Gemini.png"
                   alt="Google Gemini"
@@ -185,54 +278,16 @@ export default function AItoolsCard({ className = '' }) {
                   }}
                 />
               </div>
-              <span 
-                className="font-inter font-medium text-center"
-                style={{ 
-                  color: '#ffffff',
-                  fontSize: '9px'
-                }}
-              >
-                Gemini
+              <span style={{ 
+                color: 'rgba(255, 255, 255, 0.14)', 
+                fontSize: '12px', 
+                fontFamily: 'Inter', 
+                fontWeight: '500' 
+              }}>
+                Google Gemini
               </span>
             </div>
-          )}
-        </div>
-
-        {/* Bottom Row - 1 Tool Left Aligned (only for non-tablet) */}
-        {!isTabletLeftCard && (
-        <div className="flex justify-start">
-          {/* Google Gemini */}
-          <div className="flex flex-col items-center transition-transform duration-300 ease-in-out cursor-pointer hover:scale-110 hover:-translate-y-2">
-              <div 
-                className="bg-[#0A1628] rounded-[20px] flex items-center justify-center mb-[8px]"
-                style={{
-                  width: '72px',
-                  height: '72px'
-                }}
-              >
-              <Image
-                src="/Assets/ImpactSections/Ai_tools/Gemini.png"
-                alt="Google Gemini"
-                width={72}
-                height={72}
-                  className="opacity-70"
-                  style={{
-                    width: '72px',
-                    height: '72px'
-                  }}
-              />
-            </div>
-            <span 
-                className="font-inter font-medium text-center"
-                style={{ 
-                  color: '#ffffff',
-                  fontSize: '10px'
-                }}
-            >
-              Google Gemini
-            </span>
           </div>
-        </div>
         )}
       </div>
     </div>

@@ -10,10 +10,10 @@ const technologies = [
 
 const ScrollBanner = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white" style={{ marginTop: '0', paddingTop: '0' }}>
       <div 
-        className="relative w-full overflow-hidden py-10 flex items-center"
-        style={{ height: '150px' }}
+        className="relative w-full overflow-hidden flex items-center"
+        style={{ height: '200px' }}
       >
         <div 
           className="flex absolute whitespace-nowrap will-change-transform items-center animate-marquee"
@@ -26,7 +26,7 @@ const ScrollBanner = () => {
                 className="inline-block whitespace-nowrap font-inter transition-all duration-300 ease-in-out cursor-pointer"
                 style={{
                   color: isZapier ? '#0015FF' : 'rgba(0, 0, 0, 0.10)',
-                  fontSize: '60px',
+                  fontSize: 'clamp(60px, 8vw, 180px)',
                   fontWeight: 400,
                   wordWrap: 'break-word',
                   marginLeft: '8px',
@@ -50,7 +50,7 @@ const ScrollBanner = () => {
           }
         }
         .animate-marquee {
-          animation: marquee 80s linear infinite;
+          animation: marquee 120s linear infinite;
         }
       `}</style>
     </section>

@@ -5,11 +5,12 @@ import Image from 'next/image';
 export default function SoftwareCard({ className = '' }) {
   console.log('NEW SoftwareCard with 90px logos loading!');
   
-  // Determine tablet sizing based on className
+  // Determine sizing based on className
   const isTabletBottomCard = className.includes('tablet-bottom-card');
+  const isDesktopBottomCard = className.includes('desktop-bottom');
   
-  // Define tablet-specific styles
-  const tabletCardStyle = isTabletBottomCard ? {
+  // Define responsive styles
+  const responsiveCardStyle = isTabletBottomCard ? {
     width: '243px',
     height: '216px',
     padding: '20px',
@@ -28,7 +29,7 @@ export default function SoftwareCard({ className = '' }) {
       `}
       style={{
         background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 46, 122, 0.60) 100%), black',
-        ...tabletCardStyle
+        ...responsiveCardStyle
       }}
     >
       <style jsx>{`
@@ -62,15 +63,15 @@ export default function SoftwareCard({ className = '' }) {
       </div>
 
       {/* Software Icons - Responsive sizing */}
-      <div className="flex justify-start" style={{gap: isTabletBottomCard ? '8px' : '16px'}}>
+      <div className="flex justify-start" style={{gap: isTabletBottomCard ? '8px' : '16px', marginTop: isTabletBottomCard ? '20px' : '32px'}}>
         {/* Gmail */}
         <div 
           className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
           style={{ 
-            width: isTabletBottomCard ? '45px' : '90px', 
-            height: isTabletBottomCard ? '45px' : '90px',
-            minWidth: isTabletBottomCard ? '45px' : '90px',
-            minHeight: isTabletBottomCard ? '45px' : '90px',
+            width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+            height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minWidth: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minHeight: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
             animationDelay: '0s',
             borderRadius: isTabletBottomCard ? '12px' : '20px'
           }}
@@ -78,12 +79,12 @@ export default function SoftwareCard({ className = '' }) {
           <Image
             src="/Assets/ImpactSections/Software_connections/Gmail.png"
             alt="Gmail"
-            width={isTabletBottomCard ? 45 : 90}
-            height={isTabletBottomCard ? 45 : 90}
+            width={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
+            height={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
             className="object-contain"
             style={{ 
-              width: isTabletBottomCard ? '45px' : '90px', 
-              height: isTabletBottomCard ? '45px' : '90px' 
+              width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+              height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px' 
             }}
           />
         </div>
@@ -92,10 +93,10 @@ export default function SoftwareCard({ className = '' }) {
         <div 
           className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
           style={{ 
-            width: isTabletBottomCard ? '45px' : '90px', 
-            height: isTabletBottomCard ? '45px' : '90px',
-            minWidth: isTabletBottomCard ? '45px' : '90px',
-            minHeight: isTabletBottomCard ? '45px' : '90px',
+            width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+            height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minWidth: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minHeight: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
             animationDelay: '0.5s',
             borderRadius: isTabletBottomCard ? '12px' : '20px'
           }}
@@ -103,12 +104,12 @@ export default function SoftwareCard({ className = '' }) {
           <Image
             src="/Assets/ImpactSections/Software_connections/Notion.png"
             alt="Notion"
-            width={isTabletBottomCard ? 45 : 90}
-            height={isTabletBottomCard ? 45 : 90}
+            width={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
+            height={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
             className="object-contain"
             style={{ 
-              width: isTabletBottomCard ? '45px' : '90px', 
-              height: isTabletBottomCard ? '45px' : '90px' 
+              width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+              height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px' 
             }}
           />
         </div>
@@ -117,10 +118,10 @@ export default function SoftwareCard({ className = '' }) {
         <div 
           className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
           style={{ 
-            width: isTabletBottomCard ? '45px' : '90px', 
-            height: isTabletBottomCard ? '45px' : '90px',
-            minWidth: isTabletBottomCard ? '45px' : '90px',
-            minHeight: isTabletBottomCard ? '45px' : '90px',
+            width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+            height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minWidth: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minHeight: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
             animationDelay: '1s',
             borderRadius: isTabletBottomCard ? '12px' : '20px'
           }}
@@ -128,12 +129,12 @@ export default function SoftwareCard({ className = '' }) {
           <Image
             src="/Assets/ImpactSections/Software_connections/SalesForce.png"
             alt="SalesForce"
-            width={isTabletBottomCard ? 45 : 90}
-            height={isTabletBottomCard ? 45 : 90}
+            width={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
+            height={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
             className="object-contain"
             style={{ 
-              width: isTabletBottomCard ? '45px' : '90px', 
-              height: isTabletBottomCard ? '45px' : '90px' 
+              width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+              height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px' 
             }}
           />
         </div>
@@ -142,10 +143,10 @@ export default function SoftwareCard({ className = '' }) {
         <div 
           className="bg-[#FF4A00] rounded-[20px] flex items-center justify-center bounce-animation"
           style={{ 
-            width: isTabletBottomCard ? '45px' : '90px', 
-            height: isTabletBottomCard ? '45px' : '90px',
-            minWidth: isTabletBottomCard ? '45px' : '90px',
-            minHeight: isTabletBottomCard ? '45px' : '90px',
+            width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+            height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minWidth: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
+            minHeight: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px',
             animationDelay: '1.5s',
             borderRadius: isTabletBottomCard ? '12px' : '20px'
           }}
@@ -153,12 +154,12 @@ export default function SoftwareCard({ className = '' }) {
           <Image
             src="/Assets/ImpactSections/Software_connections/Zapier.png"
             alt="Zapier"
-            width={isTabletBottomCard ? 45 : 90}
-            height={isTabletBottomCard ? 45 : 90}
+            width={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
+            height={isTabletBottomCard ? 54 : isDesktopBottomCard ? 110 : 80}
             className="object-contain"
             style={{ 
-              width: isTabletBottomCard ? '45px' : '90px', 
-              height: isTabletBottomCard ? '45px' : '90px' 
+              width: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px', 
+              height: isTabletBottomCard ? '54px' : isDesktopBottomCard ? '110px' : '80px' 
             }}
           />
         </div>

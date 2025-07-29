@@ -79,7 +79,7 @@ const BreakdownCard = ({ step, activeCardIndex, index }: BreakdownCardProps) => 
             >
               {step.title}
             </h3>
-            <div style={{ height: '14px' }} />
+            <div style={{ height: '8px' }} />
             <p 
               className="" 
               style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '18px', color: 'rgba(255, 255, 255, 0.60)' }}

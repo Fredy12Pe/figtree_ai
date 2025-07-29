@@ -64,6 +64,9 @@ const WhatWeAutomate = () => {
         .whatweautomate-tablet-layout {
           display: none;
         }
+        .whatweautomate-desktop-layout {
+          display: none;
+        }
         
         @media (min-width: 768px) and (max-width: 1023px) {
           .whatweautomate-mobile-layout {
@@ -72,13 +75,25 @@ const WhatWeAutomate = () => {
           .whatweautomate-tablet-layout {
             display: flex !important;
           }
+          .whatweautomate-desktop-layout {
+            display: none !important;
+          }
         }
         
         @media (min-width: 1024px) {
           .whatweautomate-mobile-layout {
-            display: flex !important;
+            display: none !important;
           }
           .whatweautomate-tablet-layout {
+            display: none !important;
+          }
+          .whatweautomate-desktop-layout {
+            display: flex !important;
+          }
+        }
+        
+        @media (max-width: 767px) {
+          .whatweautomate-tablet-layout, .whatweautomate-desktop-layout {
             display: none !important;
           }
         }
@@ -339,6 +354,165 @@ const WhatWeAutomate = () => {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Desktop Layout (3x2 Grid) */}
+      <div 
+        className="whatweautomate-desktop-layout" 
+        style={{
+          width: '100%',
+          paddingTop: '120px',
+          paddingBottom: '120px',
+          background: 'black',
+          overflow: 'hidden',
+          borderTopLeftRadius: '40px',
+          borderTopRightRadius: '40px',
+          flexDirection: 'column',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          gap: '80px',
+          boxSizing: 'border-box'
+        }}
+      >
+        {/* 1440px Content Container */}
+        <div style={{
+          maxWidth: '1440px',
+          margin: '0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '80px',
+          width: '100%'
+        }}>
+          {/* Top Text Content */}
+          <div style={{
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            gap: '40px',
+            display: 'flex',
+            textAlign: 'left',
+            width: '100%'
+          }}>
+            {/* Heading Group (Heading + Subheading) */}
+            <div style={{
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              gap: '16px',
+              display: 'flex'
+            }}>
+              <div style={{
+                color: 'white',
+                fontSize: '48px',
+                fontFamily: 'Inter',
+                fontWeight: '600',
+                wordWrap: 'break-word'
+              }}>
+                What we automate
+              </div>
+              <div style={{
+                color: '#373737',
+                fontSize: '32px',
+                fontFamily: 'Inter',
+                fontWeight: '600',
+                wordWrap: 'break-word'
+              }}>
+                Smarter workflows. <br/>Better results.
+              </div>
+            </div>
+            
+            {/* Paragraph */}
+            <div style={{
+              color: 'white',
+              fontSize: '20px',
+              fontFamily: 'Inter',
+              fontWeight: '400',
+              wordWrap: 'break-word',
+              lineHeight: '1.7',
+              width: '70%'
+            }}>
+              We build custom AI-powered automations that handle the everyday tasks holding your business back. From lead management and scheduling to contracts, CRM updates, and client communications — every part of your workflow is mapped, automated, and fully integrated with your existing tools. Our systems free up hours every week, allowing you to scale operations, stay consistent, and deliver a better client experience — all while keeping full control of your business processes.
+            </div>
+          </div>
+
+          {/* 3x2 Grid Cards */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateRows: 'repeat(2, 280px)',
+            gap: '24px',
+            width: '100%'
+          }}>
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                style={{
+                  width: '100%',
+                  height: '280px',
+                  background: '#191919',
+                  borderRadius: '32px',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  display: 'flex',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div style={{
+                  paddingLeft: '40px',
+                  paddingRight: '40px',
+                  width: '100%',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  gap: '20px',
+                  display: 'flex'
+                }}>
+                  {/* Icon and Title Group */}
+                  <div style={{
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start',
+                    alignItems: 'flex-start',
+                    gap: '16px',
+                    display: 'flex'
+                  }}>
+                    <Image src={feature.icon} alt="" width={64} height={64} />
+                    <div style={{
+                      color: 'white',
+                      fontSize: '24px',
+                      fontFamily: 'Inter',
+                      fontWeight: '700',
+                      wordWrap: 'break-word',
+                      lineHeight: '1.3'
+                    }}>
+                      {feature.title}
+                    </div>
+                  </div>
+                  {/* Paragraph */}
+                  <div style={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    fontSize: '18px',
+                    fontFamily: 'Inter',
+                    fontWeight: '400',
+                    wordWrap: 'break-word',
+                    lineHeight: '1.6'
+                  }}>
+                    {feature.description}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
