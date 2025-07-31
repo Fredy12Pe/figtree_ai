@@ -41,6 +41,20 @@ export default function Header() {
     }
   }, [])
 
+  // Prevent background scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
+
   return (
     <>
       <header className="relative w-full h-screen overflow-hidden bg-black rounded-b-[28px] lg:rounded-b-[40px]">
@@ -95,7 +109,7 @@ export default function Header() {
             }
           `}</style>
           {/* Mobile/Tablet Layout */}
-          <div className="mobile-header-layout h-full flex flex-col">
+          <div className={`mobile-header-layout h-full flex flex-col ${isMenuOpen ? 'hidden' : ''}`}>
 
             {/* Navigation Group - Positioned 60px from top */}
             <div className="w-full pt-[60px]">
@@ -122,10 +136,19 @@ export default function Header() {
                       aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                       style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
                     >
-                      <div className="w-[20px] h-[14px] flex flex-col justify-between">
-                        <div className="w-full h-[2px] rounded-full" style={{ backgroundColor: 'white' }}></div>
-                        <div className="w-full h-[2px] rounded-full" style={{ backgroundColor: 'white' }}></div>
-                        <div className="w-full h-[2px] rounded-full" style={{ backgroundColor: 'white' }}></div>
+                      <div className="w-[20px] h-[14px] flex flex-col justify-between relative">
+                        <div 
+                          className={`w-full h-[2px] rounded-full transition-all duration-300 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} 
+                          style={{ backgroundColor: 'white' }}
+                        ></div>
+                        <div 
+                          className={`w-full h-[2px] rounded-full transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-0' : ''}`} 
+                          style={{ backgroundColor: 'white' }}
+                        ></div>
+                        <div 
+                          className={`w-full h-[2px] rounded-full transition-all duration-300 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} 
+                          style={{ backgroundColor: 'white' }}
+                        ></div>
                       </div>
                     </button>
 
@@ -264,65 +287,85 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="xl:hidden fixed inset-0 z-[100] bg-black/95 backdrop-blur-lg">
-          <div className="flex flex-col h-full p-4 sm:p-6">
-            <div className="flex justify-between items-center mb-8 sm:mb-12">
-              <Link href="/" className="flex items-center gap-[12px]">
-                <Image
-                  src="/Assets/Header/Logo.png"
-                  alt="Vine & Branches Logo"
-                  width={39}
-                  height={39}
-                  className="w-[39px] h-[39px]"
-                />
-                <span className="text-white text-[22px] font-semibold font-inter">
-                  Vine & Branches
-                </span>
-              </Link>
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="p-2"
-                aria-label="Close menu"
-              >
-                <svg width="20" height="20" className="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
+        <div className="xl:hidden fixed inset-0 z-[9999] bg-black animate-in fade-in duration-1000 ease-in-out" style={{ width: '100vw', height: '100vh' }}>
+          <div className="flex flex-col h-full animate-in slide-in-from-top-2 duration-1200 ease-in-out" style={{ backgroundColor: 'rgba(0, 0, 0, 0.60)', backdropFilter: 'blur(40px)' }}>
+            {/* Header */}
+            <div className="w-full pt-[60px] animate-in fade-in slide-in-from-top-1 duration-800 delay-400 ease-in-out">
+              <nav className="mx-[28px]">
+                <div className="flex justify-between items-center w-full">
+                  <Link href="/" className="flex items-center gap-[12px] animate-in fade-in slide-in-from-left-1 duration-600 delay-600 ease-in-out">
+                    <Image
+                      src="/Assets/Header/Logo.png"
+                      alt="Vine & Branches Logo"
+                      width={39}
+                      height={39}
+                      className="w-[39px] h-[39px]"
+                    />
+                    <span className="text-[22px] font-semibold font-inter" style={{ color: 'white' }}>
+                      Vine & Branches
+                    </span>
+                  </Link>
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 animate-in fade-in slide-in-from-right-1 duration-600 delay-600 ease-in-out"
+                    aria-label="Close menu"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 6L6 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </nav>
             </div>
             
-            <div className="flex flex-col space-y-6 sm:space-y-8 text-center text-white flex-1 justify-center">
+            {/* Navigation Menu - Centered */}
+            <div className="flex flex-col items-center justify-center flex-1" style={{ gap: '48px' }}>
               <Link
                 href="#"
-                className="text-lg sm:text-xl font-medium text-white py-2 sm:py-3 font-inter hover:text-white/80 transition-colors"
+                className="font-inter font-medium hover:text-white/80 transition-all duration-800 ease-in-out animate-in fade-in slide-in-from-bottom-2 duration-800 delay-800"
+                style={{ fontSize: '24px', color: 'white' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 AI Toolkit
               </Link>
               <Link
                 href="#"
-                className="text-lg sm:text-xl font-medium text-white py-2 sm:py-3 font-inter hover:text-white/80 transition-colors"
+                className="font-inter font-medium hover:text-white/80 transition-all duration-800 ease-in-out animate-in fade-in slide-in-from-bottom-2 duration-800 delay-900"
+                style={{ fontSize: '24px', color: 'white' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 How It Works
               </Link>
               <Link
                 href="#"
-                className="text-lg sm:text-xl font-medium text-white py-2 sm:py-3 font-inter hover:text-white/80 transition-colors"
+                className="font-inter font-medium hover:text-white/80 transition-all duration-800 ease-in-out animate-in fade-in slide-in-from-bottom-2 duration-800 delay-1000"
+                style={{ fontSize: '24px', color: 'white' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Pricing
               </Link>
               <Link
                 href="#"
-                className="text-lg sm:text-xl font-medium text-white py-2 sm:py-3 font-inter hover:text-white/80 transition-colors"
+                className="font-inter font-medium hover:text-white/80 transition-all duration-800 ease-in-out animate-in fade-in slide-in-from-bottom-2 duration-800 delay-1100"
+                style={{ fontSize: '24px', color: 'white' }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
               <Link
                 href="#"
-                className="text-base sm:text-lg font-medium border border-white rounded-lg px-4 sm:px-6 py-2 sm:py-3 text-center text-white mt-4 sm:mt-6 font-inter hover:bg-white hover:text-black transition-all duration-300"
+                className="font-inter font-medium border border-white text-center hover:bg-white hover:text-black transition-all duration-800 ease-in-out animate-in fade-in slide-in-from-bottom-2 duration-800 delay-1200"
+                style={{ 
+                  fontSize: '18px',
+                  width: '228px',
+                  height: '60px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  borderRadius: '28px'
+                }}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get In Touch

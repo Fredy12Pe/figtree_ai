@@ -76,10 +76,6 @@ export default function Impact() {
         
         {/* Mobile Layout */}
         <div className="impact-mobile-layout">
-          <div style={{ position: 'fixed', top: '10px', left: '10px', background: 'red', color: 'white', padding: '5px', zIndex: 9999 }}>
-            MOBILE IMPACT ACTIVE
-          </div>
-          
           <h2 
             className="text-center text-[28px] w-full mb-7"
             style={{ 
@@ -108,11 +104,6 @@ export default function Impact() {
           gap: '28px',
           display: 'flex'
         }}>
-          <div style={{ position: 'fixed', top: '10px', left: '10px', background: 'blue', color: 'white', padding: '5px', zIndex: 9999 }}>
-            TABLET IMPACT ACTIVE
-          </div>
-          
-
           
           {/* Title */}
           <div style={{
@@ -173,9 +164,6 @@ export default function Impact() {
           alignItems: 'flex-start',
           background: 'white'
         }}>
-          <div style={{ position: 'fixed', top: '10px', left: '10px', background: 'green', color: 'white', padding: '5px', zIndex: 9999 }}>
-            DESKTOP IMPACT ACTIVE
-          </div>
           {/* 1440px Content Container */}
           <div style={{
             maxWidth: '1440px',
