@@ -1,8 +1,8 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function LogoCard({ className = '' }) {
-  console.log('LogoCard rendering', className);
+  const videoRef = useRef<HTMLVideoElement>(null);
   
   // Determine tablet sizing based on className
   const isTabletBottomCard = className.includes('tablet-bottom-card');
@@ -13,6 +13,14 @@ export default function LogoCard({ className = '' }) {
     height: '216px',
     borderRadius: '28px'
   } : {};
+  
+  // Set video to start from 1 second and loop
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 1;
+      videoRef.current.play().catch(console.error);
+    }
+  }, []);
   
   return (
     <div 
@@ -29,6 +37,7 @@ export default function LogoCard({ className = '' }) {
     >
       {/* Background Video */}
       <video
+        ref={videoRef}
         className="absolute top-0 left-0 w-full h-full object-cover"
         autoPlay
         loop

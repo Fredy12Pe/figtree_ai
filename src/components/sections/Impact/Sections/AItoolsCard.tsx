@@ -1,9 +1,22 @@
+"use client";
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function AItoolsCard({ className = '' }) {
+  const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
+  
   // Determine sizing based on className
   const isTabletLeftCard = className.includes('tablet-left-card');
   const isDesktopTopLeftCard = className.includes('desktop-top-left-card');
+  
+  // Animation effect for logos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLogoIndex((prev) => (prev + 1) % 4); // 4 logos total
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
   
   // Define base styles
   const baseCardStyle = {
@@ -80,9 +93,11 @@ export default function AItoolsCard({ className = '' }) {
             flexDirection: 'column', 
             alignItems: 'center', 
             cursor: 'pointer', 
-            transition: 'transform 0.3s ease-in-out',
-            marginRight: isTabletLeftCard ? '16px' : '46px'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            transition: 'all 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px',
+            transform: currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)',
+            filter: currentLogoIndex === 0 ? 'brightness(1.2)' : 'brightness(1)'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)'}>
             <div style={{ 
               width: isTabletLeftCard ? '60px' : '60px', 
               height: isTabletLeftCard ? '60px' : '60px', 
@@ -91,7 +106,8 @@ export default function AItoolsCard({ className = '' }) {
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              marginBottom: '8px' 
+              marginBottom: '8px',
+              transition: 'all 0.3s ease-in-out'
             }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/ChatGpt.png"
@@ -101,7 +117,8 @@ export default function AItoolsCard({ className = '' }) {
                 className="opacity-70"
                 style={{
                   width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px'
+                  height: isTabletLeftCard ? '60px' : '60px',
+                  transition: 'all 0.3s ease-in-out'
                 }}
               />
             </div>
@@ -109,7 +126,8 @@ export default function AItoolsCard({ className = '' }) {
               color: 'rgba(255, 255, 255, 0.14)', 
               fontSize: isTabletLeftCard ? '9px' : '12px', 
               fontFamily: 'Inter', 
-              fontWeight: '500' 
+              fontWeight: '500',
+              transition: 'all 0.3s ease-in-out'
             }}>
               Chat GPT
             </span>
@@ -121,9 +139,11 @@ export default function AItoolsCard({ className = '' }) {
             flexDirection: 'column', 
             alignItems: 'center', 
             cursor: 'pointer', 
-            transition: 'transform 0.3s ease-in-out',
-            marginRight: isTabletLeftCard ? '16px' : '46px'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            transition: 'all 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px',
+            transform: currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)',
+            filter: currentLogoIndex === 1 ? 'brightness(1.2)' : 'brightness(1)'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)'}>
             <div style={{ 
               width: isTabletLeftCard ? '60px' : '60px', 
               height: isTabletLeftCard ? '60px' : '60px', 
@@ -132,7 +152,8 @@ export default function AItoolsCard({ className = '' }) {
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              marginBottom: '8px' 
+              marginBottom: '8px',
+              transition: 'all 0.3s ease-in-out'
             }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/LindyAi.png"
@@ -142,7 +163,8 @@ export default function AItoolsCard({ className = '' }) {
                 className="opacity-70"
                 style={{
                   width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px'
+                  height: isTabletLeftCard ? '60px' : '60px',
+                  transition: 'all 0.3s ease-in-out'
                 }}
               />
             </div>
@@ -150,7 +172,8 @@ export default function AItoolsCard({ className = '' }) {
               color: 'rgba(255, 255, 255, 0.14)', 
               fontSize: isTabletLeftCard ? '9px' : '12px', 
               fontFamily: 'Inter', 
-              fontWeight: '500' 
+              fontWeight: '500',
+              transition: 'all 0.3s ease-in-out'
             }}>
               Lindy AI
             </span>
@@ -162,9 +185,11 @@ export default function AItoolsCard({ className = '' }) {
             flexDirection: 'column', 
             alignItems: 'center', 
             cursor: 'pointer', 
-            transition: 'transform 0.3s ease-in-out',
-            marginRight: isTabletLeftCard ? '16px' : '46px'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            transition: 'all 0.3s ease-in-out',
+            marginRight: isTabletLeftCard ? '16px' : '46px',
+            transform: currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)',
+            filter: currentLogoIndex === 2 ? 'brightness(1.2)' : 'brightness(1)'
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)'}>
             <div style={{ 
               width: isTabletLeftCard ? '60px' : '60px', 
               height: isTabletLeftCard ? '60px' : '60px', 
@@ -173,7 +198,8 @@ export default function AItoolsCard({ className = '' }) {
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center', 
-              marginBottom: '8px' 
+              marginBottom: '8px',
+              transition: 'all 0.3s ease-in-out'
             }}>
               <Image
                 src="/Assets/ImpactSections/Ai_tools/Zapier.png"
@@ -183,7 +209,8 @@ export default function AItoolsCard({ className = '' }) {
                 className="opacity-70"
                 style={{
                   width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px'
+                  height: isTabletLeftCard ? '60px' : '60px',
+                  transition: 'all 0.3s ease-in-out'
                 }}
               />
             </div>
@@ -191,7 +218,8 @@ export default function AItoolsCard({ className = '' }) {
               color: 'rgba(255, 255, 255, 0.14)', 
               fontSize: isTabletLeftCard ? '9px' : '12px', 
               fontFamily: 'Inter', 
-              fontWeight: '500' 
+              fontWeight: '500',
+              transition: 'all 0.3s ease-in-out'
             }}>
               Zapier
             </span>
@@ -204,9 +232,11 @@ export default function AItoolsCard({ className = '' }) {
               flexDirection: 'column', 
               alignItems: 'center', 
               cursor: 'pointer', 
-              transition: 'transform 0.3s ease-in-out',
-              marginRight: isTabletLeftCard ? '16px' : '46px'
-            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              transition: 'all 0.3s ease-in-out',
+              marginRight: isTabletLeftCard ? '16px' : '46px',
+              transform: currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)',
+              filter: currentLogoIndex === 3 ? 'brightness(1.2)' : 'brightness(1)'
+            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)'}>
               <div style={{ 
                 width: isTabletLeftCard ? '60px' : '112px', 
                 height: isTabletLeftCard ? '60px' : '112px', 
@@ -215,7 +245,8 @@ export default function AItoolsCard({ className = '' }) {
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center', 
-                marginBottom: '8px' 
+                marginBottom: '8px',
+                transition: 'all 0.3s ease-in-out'
               }}>
                 <Image
                   src="/Assets/ImpactSections/Ai_tools/Gemini.png"
@@ -225,7 +256,8 @@ export default function AItoolsCard({ className = '' }) {
                   className="opacity-70"
                   style={{
                     width: isTabletLeftCard ? '60px' : '112px',
-                    height: isTabletLeftCard ? '60px' : '112px'
+                    height: isTabletLeftCard ? '60px' : '112px',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                 />
               </div>
@@ -233,7 +265,8 @@ export default function AItoolsCard({ className = '' }) {
                 color: 'rgba(255, 255, 255, 0.14)', 
                 fontSize: isTabletLeftCard ? '9px' : '12px', 
                 fontFamily: 'Inter', 
-                fontWeight: '500' 
+                fontWeight: '500',
+                transition: 'all 0.3s ease-in-out'
               }}>
                 Google Gemini
               </span>
@@ -254,8 +287,10 @@ export default function AItoolsCard({ className = '' }) {
               flexDirection: 'column', 
               alignItems: 'center', 
               cursor: 'pointer', 
-              transition: 'transform 0.3s ease-in-out' 
-            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              transition: 'all 0.3s ease-in-out',
+              transform: currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)',
+              filter: currentLogoIndex === 3 ? 'brightness(1.2)' : 'brightness(1)'
+            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)'}>
               <div style={{ 
                 width: '60px', 
                 height: '60px', 
@@ -264,7 +299,8 @@ export default function AItoolsCard({ className = '' }) {
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'center', 
-                marginBottom: '8px' 
+                marginBottom: '8px',
+                transition: 'all 0.3s ease-in-out'
               }}>
                 <Image
                   src="/Assets/ImpactSections/Ai_tools/Gemini.png"
@@ -274,7 +310,8 @@ export default function AItoolsCard({ className = '' }) {
                   className="opacity-70"
                   style={{
                     width: '60px',
-                    height: '60px'
+                    height: '60px',
+                    transition: 'all 0.3s ease-in-out'
                   }}
                 />
               </div>
@@ -282,7 +319,8 @@ export default function AItoolsCard({ className = '' }) {
                 color: 'rgba(255, 255, 255, 0.14)', 
                 fontSize: '12px', 
                 fontFamily: 'Inter', 
-                fontWeight: '500' 
+                fontWeight: '500',
+                transition: 'all 0.3s ease-in-out'
               }}>
                 Google Gemini
               </span>

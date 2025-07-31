@@ -63,7 +63,7 @@ export default function SoftwareCard({ className = '' }) {
       </div>
 
       {/* Software Icons - Responsive sizing */}
-      <div className="flex justify-start" style={{gap: isTabletBottomCard ? '8px' : '16px', marginTop: isTabletBottomCard ? '20px' : '32px'}}>
+      <div className="flex justify-start" style={{gap: isTabletBottomCard ? '8px' : '16px', marginTop: isTabletBottomCard ? '20px' : '8px'}}>
         {/* Gmail */}
         <div 
           className="bg-white rounded-[20px] flex items-center justify-center bounce-animation"
