@@ -9,14 +9,17 @@ export default function AItoolsCard({ className = '' }) {
   const isTabletLeftCard = className.includes('tablet-left-card');
   const isDesktopTopLeftCard = className.includes('desktop-top-left-card');
   
-  // Animation effect for logos
+  // Animation effect for logos - only for mobile and tablet
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentLogoIndex((prev) => (prev + 1) % 4); // 4 logos total
-    }, 2000); // Change every 2 seconds
+    // Only animate on mobile and tablet, not desktop
+    if (isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) {
+      const interval = setInterval(() => {
+        setCurrentLogoIndex((prev) => (prev + 1) % 4); // 4 logos total
+      }, 2000); // Change every 2 seconds
 
-    return () => clearInterval(interval);
-  }, []);
+      return () => clearInterval(interval);
+    }
+  }, [isTabletLeftCard, isDesktopTopLeftCard]);
   
   // Define base styles
   const baseCardStyle = {
@@ -95,12 +98,12 @@ export default function AItoolsCard({ className = '' }) {
             cursor: 'pointer', 
             transition: 'all 0.3s ease-in-out',
             marginRight: isTabletLeftCard ? '16px' : '46px',
-            transform: currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)',
-            filter: currentLogoIndex === 0 ? 'brightness(1.2)' : 'brightness(1)'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)'}>
+            transform: isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)'),
+            filter: isDesktopTopLeftCard ? 'brightness(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 0 ? 'brightness(1.2)' : 'brightness(1)')
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1.1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)')} onMouseLeave={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 0 ? 'scale(1.1)' : 'scale(1)')}>
             <div style={{ 
-              width: isTabletLeftCard ? '60px' : '60px', 
-              height: isTabletLeftCard ? '60px' : '60px', 
+              width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
+              height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
               backgroundColor: '#0A1628', 
               borderRadius: '20px', 
               display: 'flex', 
@@ -112,12 +115,12 @@ export default function AItoolsCard({ className = '' }) {
               <Image
                 src="/Assets/ImpactSections/Ai_tools/ChatGpt.png"
                 alt="ChatGPT"
-                width={isTabletLeftCard ? 60 : 60}
-                height={isTabletLeftCard ? 60 : 60}
+                width={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
+                height={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px',
+                  width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
+                  height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
                   transition: 'all 0.3s ease-in-out'
                 }}
               />
@@ -141,12 +144,12 @@ export default function AItoolsCard({ className = '' }) {
             cursor: 'pointer', 
             transition: 'all 0.3s ease-in-out',
             marginRight: isTabletLeftCard ? '16px' : '46px',
-            transform: currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)',
-            filter: currentLogoIndex === 1 ? 'brightness(1.2)' : 'brightness(1)'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)'}>
+            transform: isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)'),
+            filter: isDesktopTopLeftCard ? 'brightness(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 1 ? 'brightness(1.2)' : 'brightness(1)')
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1.1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)')} onMouseLeave={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 1 ? 'scale(1.1)' : 'scale(1)')}>
             <div style={{ 
-              width: isTabletLeftCard ? '60px' : '60px', 
-              height: isTabletLeftCard ? '60px' : '60px', 
+              width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
+              height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
               backgroundColor: '#0A1628', 
               borderRadius: '20px', 
               display: 'flex', 
@@ -158,12 +161,12 @@ export default function AItoolsCard({ className = '' }) {
               <Image
                 src="/Assets/ImpactSections/Ai_tools/LindyAi.png"
                 alt="Lindy AI"
-                width={isTabletLeftCard ? 60 : 60}
-                height={isTabletLeftCard ? 60 : 60}
+                width={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
+                height={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px',
+                  width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
+                  height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
                   transition: 'all 0.3s ease-in-out'
                 }}
               />
@@ -187,12 +190,12 @@ export default function AItoolsCard({ className = '' }) {
             cursor: 'pointer', 
             transition: 'all 0.3s ease-in-out',
             marginRight: isTabletLeftCard ? '16px' : '46px',
-            transform: currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)',
-            filter: currentLogoIndex === 2 ? 'brightness(1.2)' : 'brightness(1)'
-          }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)'}>
+            transform: isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)'),
+            filter: isDesktopTopLeftCard ? 'brightness(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 2 ? 'brightness(1.2)' : 'brightness(1)')
+          }} onMouseEnter={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1.1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)')} onMouseLeave={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1)' : ((isTabletLeftCard || (!isTabletLeftCard && !isDesktopTopLeftCard)) && currentLogoIndex === 2 ? 'scale(1.1)' : 'scale(1)')}>
             <div style={{ 
-              width: isTabletLeftCard ? '60px' : '60px', 
-              height: isTabletLeftCard ? '60px' : '60px', 
+              width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
+              height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'), 
               backgroundColor: '#0A1628', 
               borderRadius: '20px', 
               display: 'flex', 
@@ -204,12 +207,12 @@ export default function AItoolsCard({ className = '' }) {
               <Image
                 src="/Assets/ImpactSections/Ai_tools/Zapier.png"
                 alt="Zapier"
-                width={isTabletLeftCard ? 60 : 60}
-                height={isTabletLeftCard ? 60 : 60}
+                width={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
+                height={isTabletLeftCard ? 60 : (isDesktopTopLeftCard ? 112 : 60)}
                 className="opacity-70"
                 style={{
-                  width: isTabletLeftCard ? '60px' : '60px',
-                  height: isTabletLeftCard ? '60px' : '60px',
+                  width: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
+                  height: isTabletLeftCard ? '60px' : (isDesktopTopLeftCard ? '112px' : '60px'),
                   transition: 'all 0.3s ease-in-out'
                 }}
               />
@@ -234,9 +237,9 @@ export default function AItoolsCard({ className = '' }) {
               cursor: 'pointer', 
               transition: 'all 0.3s ease-in-out',
               marginRight: isTabletLeftCard ? '16px' : '46px',
-              transform: currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)',
-              filter: currentLogoIndex === 3 ? 'brightness(1.2)' : 'brightness(1)'
-            }} onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'} onMouseLeave={(e) => e.currentTarget.style.transform = currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)'}>
+              transform: isDesktopTopLeftCard ? 'scale(1)' : (isTabletLeftCard && currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)'),
+              filter: isDesktopTopLeftCard ? 'brightness(1)' : (isTabletLeftCard && currentLogoIndex === 3 ? 'brightness(1.2)' : 'brightness(1)')
+            }} onMouseEnter={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1.1)' : (isTabletLeftCard && currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)')} onMouseLeave={(e) => e.currentTarget.style.transform = isDesktopTopLeftCard ? 'scale(1)' : (isTabletLeftCard && currentLogoIndex === 3 ? 'scale(1.1)' : 'scale(1)')}>
               <div style={{ 
                 width: isTabletLeftCard ? '60px' : '112px', 
                 height: isTabletLeftCard ? '60px' : '112px', 
